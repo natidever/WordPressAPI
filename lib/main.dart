@@ -1,20 +1,49 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:news_app/pages/global_error_screen.dart';
+import 'package:news_app/route/app_route.dart';
 
 void main() {
-  runApp(const MyApp());
+  /// handling async errors
+  runZonedGuarded(() {
+    runApp(MyApp());
+  }, (Object error, StackTrace stack) {
+    // This help use to handle asynchronous error globally
+    print('Asynchronous Error: $error');
+    //  we can report error to an external service like Sentry
+  });
+
+  /// Here ,i used  custom page to handle global errors
+  /// Based on which type of error has occured in the application
+  /// if the app encounter non-flutter error custom page is used
+  /// to handel the error gracefully
+
+  FlutterError.onError = (FlutterErrorDetails details) {
+    // Handle synchronous errors globally
+    print('Flutter Error: ${details.exceptionAsString()}');
+
+    // Redirect to custom error page using GetX
+    if (details.exception is! FlutterError) {
+      // Use GetX to navigate to the error page
+      Get.to(() => GlobalErrorScreen(
+            errorMessage: details.exceptionAsString(),
+          ));
+    }
+  };
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
-      // initialBinding: Binders(),
-      title: 'News App',
-      initialRoute: '/onboarding_page',
-    );
+    return GetMaterialApp(
+        // initialBinding: Binders()
+        title: 'News App',
+        navigatorKey: navigatorKey,
+        initialRoute: AppRoutes.home,
+        getPages: AppRoutes.routes);
   }
 }
