@@ -26,7 +26,7 @@ lib/
 │   ├── home_page.dart
 │   └── details_page.dart
 │
-├── routes/            # Contains routing logic and route definitions
+├── routes/            # Contains routing logic and route definition
 │   └── app_routes.dart
 │
 ├── services/          # Contains API services and external integrations
