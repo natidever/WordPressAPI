@@ -9,7 +9,7 @@ import 'package:news_app/utils/constants.dart';
 import 'package:news_app/widgets/custom_buttons.dart';
 import 'package:news_app/widgets/custom_form.dart';
 import 'package:news_app/widgets/custom_texts.dart';
-import 'package:news_app/widgets/layout.dart';
+import 'package:news_app/widgets/layout_helper.dart';
 
 class Login extends StatelessWidget {
   // const Login({super.key});

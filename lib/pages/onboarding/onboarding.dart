@@ -8,7 +8,7 @@ import 'package:news_app/pages/onboarding/onboarding_3.dart';
 import 'package:news_app/utils/constants.dart';
 // import 'package:news_app/widgets/carousel.dart';
 import 'package:news_app/widgets/custom_buttons.dart';
-import 'package:news_app/widgets/layout.dart';
+import 'package:news_app/widgets/layout_helper.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:google_fonts/google_fonts.dart';
 

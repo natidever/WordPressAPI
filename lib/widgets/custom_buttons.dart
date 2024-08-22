@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/utils/constants.dart';
-import 'package:news_app/widgets/layout.dart';
+import 'package:news_app/widgets/layout_helper.dart';
 
 Widget CustomPrimaryButton(
   String text,
