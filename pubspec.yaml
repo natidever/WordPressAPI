@@ -40,6 +40,7 @@ dependencies:
   smooth_page_indicator: ^1.2.0+3
   carousel_slider: ^5.0.0
   google_fonts: ^6.2.1
+  google_nav_bar: ^5.0.6
 
 
 

@@ -16,6 +16,6 @@ Widget HorizontalLine({required double height, required double width}) {
   return Container(
     height: height,
     width: width,
-    color: Color.fromRGBO(237, 237, 237, 1),
+    color: Color.fromRGBO(214, 214, 214, 1),
   );
 }

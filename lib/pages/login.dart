@@ -1,9 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/controllers/login_controller.dart';
 import 'package:news_app/utils/constants.dart';
+import 'package:news_app/widgets/custom_buttons.dart';
 import 'package:news_app/widgets/custom_form.dart';
 import 'package:news_app/widgets/custom_texts.dart';
 import 'package:news_app/widgets/layout.dart';
@@ -57,7 +60,9 @@ class Login extends StatelessWidget {
                   height: 63,
                   decoration: BoxDecoration(
                       // color: Color.fromRGBO(63, 63, 64, 1),
-                      color: Color.fromRGBO(236, 239, 239, 1),
+                      color: Color.fromRGBO(249, 252, 254, 1),
+
+                      // color: Color.fromRGBO(236, 239, 239, 1),
                       borderRadius: BorderRadius.circular(10)),
 
                   child: TextFormField(
@@ -89,8 +94,8 @@ class Login extends StatelessWidget {
                   width: 392,
                   height: 63,
                   decoration: BoxDecoration(
-                      // color: Color.fromRGBO(63, 63, 64, 1),
-                      color: Color.fromRGBO(236, 239, 239, 1),
+                      color: Color.fromRGBO(249, 252, 254, 1),
+                      // color: Color.fromRGBO(236, 239, 239, 1),
                       borderRadius: BorderRadius.circular(10)),
 
                   child: Obx(() {
@@ -129,10 +134,78 @@ class Login extends StatelessWidget {
                     );
                   }),
                 ),
-              )
+              ),
               // b/n 16
+              VerticalSpace(7),
+              Row(
+                children: [
+                  Expanded(child: Container()),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10.0),
+                    child: TextButton(
+                        onPressed: () {},
+                        child: SubText(text: "Forgot Passowrd")),
+                  ),
+                ],
+              ),
+              VerticalSpace(25),
+
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GestureDetector(
+                    onTap: () {
+                      Get.toNamed('/base_screen');
+                    },
+                    child: CustomPrimaryButton('Sign In', 382, 55, 10)),
+              ),
+
+              VerticalSpace(39),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: HorizontalLine(height: 1, width: 140),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10.0),
+                    child: Text(
+                      'or',
+                      style: TextStyle(fontWeight: FontWeight.w800),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: HorizontalLine(height: 1, width: 150),
+                  ),
+                ],
+              ),
+              VerticalSpace(40),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: CustomSecondaryButton("Sign in with Google", 10.0,
+                    'assets/images/icons/google.png'),
+              ),
+              VerticalSpace(20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: CustomSecondaryButton("Sign in with Facebook", 10.0,
+                    'assets/images/icons/facebook.png'),
+              ),
+
               // forgot=8
               // 392*64
+              VerticalSpace(MediaQuery.of(context).size.height * 0.14),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SubText(text: "Don't have an account "),
+                  Text(
+                    "Sign Up",
+                    style: TextStyle(fontWeight: FontWeight.w800),
+                  )
+                ],
+              )
             ],
           ),
         ),
