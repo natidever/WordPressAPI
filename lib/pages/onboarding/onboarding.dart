@@ -6,6 +6,7 @@ import 'package:news_app/pages/onboarding/onboarding_1.dart';
 import 'package:news_app/pages/onboarding/onboarding_2.dart';
 import 'package:news_app/pages/onboarding/onboarding_3.dart';
 import 'package:news_app/utils/constants.dart';
+// import 'package:news_app/widgets/carousel.dart';
 import 'package:news_app/widgets/custom_buttons.dart';
 import 'package:news_app/widgets/layout.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -34,7 +35,7 @@ class _OnBoadingState extends State<OnBoading> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 70, 0, 10),
+              padding: const EdgeInsets.fromLTRB(0, 86, 0, 10),
               child: Center(
                 child: SizedBox(
                   // width: size.width * 0.8,
@@ -72,6 +73,7 @@ class _OnBoadingState extends State<OnBoading> {
                   dotHeight: 9,
                   dotWidth: 9),
             ),
+            VerticalSpace(38),
             Text(
               'First to know',
               textAlign: TextAlign.center,
@@ -84,7 +86,8 @@ class _OnBoadingState extends State<OnBoading> {
 // line-height: 36.52px;
               ),
             ),
-            VerticalSpace(size.height * 0.04),
+            // VerticalSpace(size.height * 0.04),
+            VerticalSpace(26),
             Container(
               width: 246.53,
               height: 55,
@@ -102,7 +105,8 @@ class _OnBoadingState extends State<OnBoading> {
                 ),
               ),
             ),
-            VerticalSpace(size.height * 0.048),
+            // VerticalSpace(size.height * 0.048),
+            VerticalSpace(70),
             Padding(
               padding: const EdgeInsets.fromLTRB(21, 0, 21, 40),
               child: GestureDetector(

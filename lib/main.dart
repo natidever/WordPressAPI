@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:news_app/bindings/main_binder.dart';
 import 'package:news_app/pages/global_error_screen.dart';
 import 'package:news_app/route/app_route.dart';
 
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        // initialBinding: Binders()
+        initialBinding: MainBinder(),
         title: 'News App',
         debugShowCheckedModeBanner: false,
         navigatorKey: navigatorKey,
