@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
 
 class HomeController extends GetxController {
   // This list fakes API RESPONSE DATA FROM OUR BACKEND
+
+  @override
+  @override
+  void onInit() {
+    super.onInit();
+    delay(); // Call fetchData method when controller initializes
+  }
+
+  RxBool isLoading = true.obs;
+
+  void delay() {
+    Future.delayed(Duration(seconds: 60), () {
+      isLoading.value = false;
+    });
+  }
 
   final List<Map<String, dynamic>> trendingNewsData = [
     {

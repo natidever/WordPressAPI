@@ -6,6 +6,8 @@ import 'package:news_app/utils/constants.dart';
 import 'package:news_app/widgets/cards.dart';
 import 'package:news_app/widgets/custom_buttons.dart';
 import 'package:news_app/widgets/custom_texts.dart';
+import 'package:news_app/widgets/effects.dart';
+import 'package:shimmer/shimmer.dart';
 
 class Homepage extends StatelessWidget {
   // const Homepage({super.key});
@@ -61,23 +63,31 @@ class Homepage extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                height: 305,
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: homecontroller.trendingNewsData.length,
-                    itemBuilder: (context, index) {
-                      final newsItem = homecontroller.trendingNewsData[index];
-                      return TrendingNewsCard(
-                        category: newsItem['Category'],
-                        imageSource: newsItem['imageSource'],
-                        heading: newsItem['heading'],
-                        publisher: newsItem['publisher'],
-                        publisherLogo: newsItem['publisherLogo'],
-                        date: newsItem['date'],
-                      );
-                    }),
-              )
+              Obx(() {
+                return homecontroller.isLoading.value == false
+                    ? Container(
+                        height: 305,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: homecontroller.trendingNewsData.length,
+                            itemBuilder: (context, index) {
+                              final newsItem =
+                                  homecontroller.trendingNewsData[index];
+                              return TrendingNewsCard(
+                                category: newsItem['Category'],
+                                imageSource: newsItem['imageSource'],
+                                heading: newsItem['heading'],
+                                publisher: newsItem['publisher'],
+                                publisherLogo: newsItem['publisherLogo'],
+                                date: newsItem['date'],
+                              );
+                            }),
+                      )
+                    : SizedBox(
+                        height: 305,
+                        width: MediaQuery.of(context).size.width,
+                        child: TrendingShimmerEffect());
+              })
             ],
           ),
         ),

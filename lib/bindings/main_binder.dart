@@ -6,6 +6,6 @@ class MainBinder extends Bindings {
   @override
   void dependencies() {
     Get.put(LoginController());
-    Get.put(HomeController());
+    Get.lazyPut(() => HomeController());
   }
 }
