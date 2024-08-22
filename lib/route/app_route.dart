@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:news_app/pages/homepage.dart';
+import 'package:news_app/pages/login.dart';
 import 'package:news_app/pages/onboarding/onboarding.dart';
 
 class AppRoutes {
@@ -13,6 +14,6 @@ class AppRoutes {
   static List<GetPage> routes = [
     GetPage(name: onboarding, page: () => OnBoading()),
     GetPage(name: home, page: () => Homepage()),
-    GetPage(name: login, page: () => Homepage()),
+    GetPage(name: login, page: () => Login()),
   ];
 }
