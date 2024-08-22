@@ -27,6 +27,7 @@ void main() {
     // Redirect to custom error page using GetX
     if (details.exception is! FlutterError) {
       // Use GetX to navigate to the error page
+      print('${details.exceptionAsString()}');
       Get.to(() => GlobalErrorScreen(
             errorMessage: details.exceptionAsString(),
           ));
@@ -42,8 +43,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
         // initialBinding: Binders()
         title: 'News App',
+        debugShowCheckedModeBanner: false,
         navigatorKey: navigatorKey,
-        initialRoute: AppRoutes.home,
+        initialRoute: AppRoutes.onboarding,
         getPages: AppRoutes.routes);
   }
 }
