@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:news_app/utils/constants.dart';
+import 'package:news_app/widgets/custom_buttons.dart';
 import 'package:news_app/widgets/custom_texts.dart';
 
 Widget TrendingNewsCard(
@@ -49,13 +51,16 @@ Widget TrendingNewsCard(
                   Row(
                     // mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4)),
-                        child: Image.asset(
-                            width: 24,
-                            height: 24,
-                            publisherLogo ?? 'pathto/default/publisher'),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                          width: 24,
+                          height: 24,
+                          decoration: BoxDecoration(),
+                          child: Image.asset(
+                              fit: BoxFit.cover,
+                              publisherLogo ?? 'pathto/default/publisher'),
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -94,5 +99,133 @@ Widget TrendingNewsCard(
             ),
           )),
     ],
+  );
+}
+
+Widget PublisherCard(
+    {String? category,
+    String? imageSource,
+    String? heading,
+    String? publisher,
+    String? publisherLogo,
+    String? date}) {
+  return Container(
+    width: 392,
+    height: 404,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
+      color: Color.fromRGBO(249, 252, 254, 1),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.fromLTRB(16.0, 16, 0, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              //  ASSETIMAGE
+              Container(
+                  child: Row(
+                children: [
+                  ClipRRect(
+                      borderRadius: BorderRadius.circular(4),
+                      child: Container(
+                          width: 36,
+                          height: 36,
+                          child: Image.asset(
+                              fit: BoxFit.cover,
+                              'assets/images/icons/publisher3.png'))),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 12.0),
+                    child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                          children: [
+                            SubText(text: "Forbes", isheading: true),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Image.asset(
+                                  width: 18,
+                                  height: 18,
+                                  fit: BoxFit.cover,
+                                  'assets/images/icons/verified.png'),
+                            )
+                          ],
+                        ),
+                        SubText(text: "June 10,2024")
+                      ],
+                    ),
+                  )
+                ],
+              )
+                  // asst +col=name data
+
+                  ),
+
+              Container(
+                child: Row(
+                  children: [
+                    //foolow,
+                    FollowButton(),
+
+                    Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset(
+                            height: 24,
+                            width: 24,
+                            'assets/images/icons/more.png'))
+                    //4dot
+                  ],
+                ),
+              )
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 26.0),
+            child: Container(
+                width: 360,
+                height: 56,
+                child: PrimaryText700(
+                    fontSize: 20.0,
+                    text:
+                        "Tech Startup Secures \$50 Million Funding for Expansion")),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(
+                    color: Color.fromRGBO(42, 186, 255, 1),
+                  )),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 6, 10, 6),
+                child: Text(
+                  "Business",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromRGBO(42, 186, 255, 1),
+                  ),
+                ),
+              ),
+              // width: Hug (73px)px;
+              // height: Hug (30px)px;
+              // top: 144px;
+              // left: 16px;
+              // padding: 6px 10px 6px 10px;
+              // gap: 10px;
+              // border-radius: 6px 0px 0px 0px;
+              // border: 1px 0px 0px 0px;
+              // opacity: 0px;
+            ),
+          )
+        ],
+      ),
+    ),
   );
 }

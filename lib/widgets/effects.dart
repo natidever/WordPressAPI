@@ -13,7 +13,7 @@ Widget TrendingShimmerEffect() {
       baseColor: Color(0xFFF5F5F5), // Light grey base color
       highlightColor: Color(0xFFFFFFFF),
       child: ListView.builder(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.fromLTRB(10, 20, 20, 20),
           scrollDirection: Axis.horizontal,
           itemCount: 4,
           itemBuilder: (context, index) {

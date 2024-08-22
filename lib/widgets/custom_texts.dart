@@ -4,6 +4,7 @@ import 'package:news_app/utils/constants.dart';
 
 Widget PrimaryText700({required double fontSize, required String text}) {
   return Text(text,
+      textAlign: TextAlign.start,
       style:
           GoogleFonts.roboto(fontWeight: FontWeight.w700, fontSize: fontSize));
 }

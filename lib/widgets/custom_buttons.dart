@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/utils/constants.dart';
+import 'package:news_app/widgets/custom_texts.dart';
 import 'package:news_app/widgets/layout_helper.dart';
 
 Widget CustomPrimaryButton(
@@ -86,3 +87,22 @@ Widget ActionBarButton({IconData? icon, bool? iconFound, String? imageSource}) {
     // iconsize=24
   );
 }
+
+Widget FollowButton() {
+  return Container(
+      width: 91,
+      height: 37,
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(236, 236, 237, 1),
+        borderRadius: BorderRadius.circular(7),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(child: TertiaryText500(14, "Follow")),
+      ));
+}
+// color-rgba(236, 236, 237, 1)
+// 	font[500, 14]
+// 	radius=7
+// 	padding=9,37,9,37
+

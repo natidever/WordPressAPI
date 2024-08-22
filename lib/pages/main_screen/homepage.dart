@@ -35,7 +35,7 @@ class Homepage extends StatelessWidget {
               ))),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(18.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -87,7 +87,12 @@ class Homepage extends StatelessWidget {
                         height: 305,
                         width: MediaQuery.of(context).size.width,
                         child: TrendingShimmerEffect());
-              })
+              }),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 32, 0, 16),
+                child: SecondaryText600(fontSize: 20, text: "Recommendation"),
+              ),
+              PublisherCard()
             ],
           ),
         ),
