@@ -12,7 +12,7 @@ import 'package:news_app/pages/main_screen/profile.dart';
 
 // import 'package:line_icons/line_icons.dart';
 class BaseScreen extends StatefulWidget {
-  const BaseScreen({super.key});
+  // const BaseScreen({super.key});
 
   @override
   State<BaseScreen> createState() => _BaseScreenState();
@@ -22,7 +22,7 @@ class _BaseScreenState extends State<BaseScreen> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
-  static const List<Widget> _widgetOptions = <Widget>[
+  static List<Widget> _widgetOptions = <Widget>[
     Homepage(),
     Discover(),
     Bookmark(),

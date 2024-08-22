@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:news_app/controllers/home_controller.dart';
 import 'package:news_app/utils/constants.dart';
 import 'package:news_app/widgets/cards.dart';
 import 'package:news_app/widgets/custom_buttons.dart';
 import 'package:news_app/widgets/custom_texts.dart';
 
 class Homepage extends StatelessWidget {
-  const Homepage({super.key});
+  // const Homepage({super.key});
+
+  final homecontroller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +42,7 @@ class Homepage extends StatelessWidget {
                   text: 'Discover a world of news that matters to you',
                   isheading: true),
               Padding(
-                padding: const EdgeInsets.only(top: 20),
+                padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -57,8 +61,23 @@ class Homepage extends StatelessWidget {
                   ],
                 ),
               ),
-              TrendingNewsCard(
-                  imageSource: "assets/images/appcontents/heading1.jpg")
+              Container(
+                height: 305,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: homecontroller.trendingNewsData.length,
+                    itemBuilder: (context, index) {
+                      final newsItem = homecontroller.trendingNewsData[index];
+                      return TrendingNewsCard(
+                        category: newsItem['Category'],
+                        imageSource: newsItem['imageSource'],
+                        heading: newsItem['heading'],
+                        publisher: newsItem['publisher'],
+                        publisherLogo: newsItem['publisherLogo'],
+                        date: newsItem['date'],
+                      );
+                    }),
+              )
             ],
           ),
         ),

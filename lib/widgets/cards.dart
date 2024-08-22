@@ -39,10 +39,7 @@ Widget TrendingNewsCard(
               child: Container(
                   width: 269,
                   height: 72,
-                  child: PrimaryText700(
-                      fontSize: 18.0,
-                      text:
-                          'Global Summit on Climate Change: Historic Agreement Reached')),
+                  child: PrimaryText700(fontSize: 18.0, text: heading ?? "")),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(8.0, 12, 8, 8),
@@ -58,11 +55,11 @@ Widget TrendingNewsCard(
                         child: Image.asset(
                             width: 24,
                             height: 24,
-                            'assets/images/icons/publisher1.png'),
+                            publisherLogo ?? 'pathto/default/publisher'),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: SubText(text: "BBC News"),
+                        child: SubText(text: publisher ?? 'default publihser'),
                       ),
                       Image.asset(
                           width: 13,
