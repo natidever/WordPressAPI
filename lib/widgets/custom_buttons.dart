@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/utils/constants.dart';
 import 'package:news_app/widgets/layout.dart';
@@ -60,5 +61,28 @@ Widget CustomSecondaryButton(
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(borderRadius),
         border: Border.all(color: radiusColor)),
+  );
+}
+
+Widget ActionBarButton({IconData? icon, bool? iconFound, String? imageSource}) {
+  return Container(
+    width: 52,
+    height: 52,
+    decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 20,
+            color: Color.fromARGB(255, 187, 187, 187).withOpacity(.1),
+          )
+        ],
+        border: Border.all(color: radiusColor),
+        borderRadius: BorderRadius.circular(10)),
+    child: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child:
+            iconFound == false ? Image.asset(imageSource ?? "") : Icon(icon)),
+    //   size:52
+    // border--10
+    // iconsize=24
   );
 }

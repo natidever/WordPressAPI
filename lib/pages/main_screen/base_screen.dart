@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:news_app/pages/main_screen/bookmark.dart';
+import 'package:news_app/pages/main_screen/discover.dart';
+import 'package:news_app/pages/main_screen/homepage.dart';
+import 'package:news_app/pages/main_screen/profile.dart';
 
 // import 'package:line_icons/line_icons.dart';
 class BaseScreen extends StatefulWidget {
@@ -19,32 +23,15 @@ class _BaseScreenState extends State<BaseScreen> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Likes',
-      style: optionStyle,
-    ),
-    Text(
-      'Search',
-      style: optionStyle,
-    ),
-    Text(
-      'Profile',
-      style: optionStyle,
-    ),
+    Homepage(),
+    Discover(),
+    Bookmark(),
+    Profile()
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 20,
-        title: const Text('GoogleNavBar'),
-      ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
