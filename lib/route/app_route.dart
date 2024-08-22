@@ -7,10 +7,12 @@ class AppRoutes {
   static const home = '/home';
   static const details = '/details';
   static const onboarding = '/onboarding';
+  static const login = '/login';
 
   // Define the routes map u
   static List<GetPage> routes = [
-    GetPage(name: home, page: () => Homepage()),
     GetPage(name: onboarding, page: () => OnBoading()),
+    GetPage(name: home, page: () => Homepage()),
+    GetPage(name: login, page: () => Homepage()),
   ];
 }

@@ -8,16 +8,17 @@ class Onboarding1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 150, 0, 10),
-      child: Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
-          // width: 328,
-          height: 383,
-          child: ClipRRect(
-              borderRadius: BorderRadius.circular(32),
-              child:
-                  Image.asset('assets/images/boarding/boarding_image1.jpg'))),
+      padding: const EdgeInsets.fromLTRB(30, 40, 30, 30),
+      child: ClipRRect(
+          borderRadius: BorderRadius.circular(13),
+          child: Container(
+              child: Image.asset(
+                  // width: size.width * 0.8,
+                  // height: 7,
+                  fit: BoxFit.cover,
+                  'assets/images/boarding/boarding_image1.jpg'))),
     );
   }
 }

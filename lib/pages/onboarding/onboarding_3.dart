@@ -8,45 +8,17 @@ class Onboarding3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Column(
-      children: [
-        SizedBox(
-          height: 15,
-        ),
-        SizedBox(
-            // height: 420, child: Image.asset('/assets/images/splash/logo.png')
-
-            ),
-        Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'finaly',
-                style: TextStyle(
-                    color: Colors.amber,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    letterSpacing: 2),
-              ),
-              SizedBox(
-                height: 6,
-              ),
-              Text(
-                'page3description',
-                style: TextStyle(
-                    color: Colors.amber,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold),
-              )
-            ],
-          ),
-        ),
-        GestureDetector(
-            onTap: () => Get.offAllNamed('/home'), child: Text("skip"))
-      ],
-    ));
+    final size = MediaQuery.of(context).size;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(30, 40, 36, 30),
+      child: ClipRRect(
+          borderRadius: BorderRadius.circular(13),
+          child: Container(
+              child: Image.asset(
+                  // width: size.width * 0.8,
+                  // height: 7,
+                  fit: BoxFit.cover,
+                  'assets/images/boarding/onboarding_image3.jpg'))),
+    );
   }
 }
