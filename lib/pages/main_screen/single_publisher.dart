@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/components/dropdown/gf_dropdown.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:news_app/controllers/home_controller.dart';
 import 'package:news_app/utils/constants.dart';
+import 'package:news_app/widgets/cards.dart';
 import 'package:news_app/widgets/custom_buttons.dart';
 import 'package:news_app/widgets/custom_texts.dart';
+import 'package:news_app/widgets/effects.dart';
 import 'package:news_app/widgets/layout_helper.dart';
 
 class SinglePublisher extends StatefulWidget {
@@ -15,6 +18,8 @@ class SinglePublisher extends StatefulWidget {
 class _SinglePublisherState extends State<SinglePublisher> {
   // const SinglePublisher({super.key});
   String? dropdownValue = "Enviroment";
+  final homecontroller = Get.find<HomeController>();
+  final searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +29,7 @@ class _SinglePublisherState extends State<SinglePublisher> {
       backgroundColor: white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        // backgroundColor: white,
+        backgroundColor: white,
         elevation: 0,
         // backgroundColor: white,
         bottom: PreferredSize(
@@ -203,7 +208,58 @@ class _SinglePublisherState extends State<SinglePublisher> {
                 ],
               ),
             ),
-          )
+          ),
+          SliverPadding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            sliver: SliverToBoxAdapter(
+              child: Container(
+                  // width: size.width * 0.5,
+                  // height: size.width * 0.5,
+                  child: CustomSearchBar(
+                      onchanged: (query) =>
+                          homecontroller.filterPublisherList(query),
+                      textEditingController: searchController)),
+            ),
+          ),
+          Obx(() {
+            return homecontroller.isLoading.value == false
+                ? SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        // final newsItem = homecontroller.publisherList[index];
+                        final newsItem = homecontroller.filteredList[index];
+                        return Padding(
+                          padding: const EdgeInsets.fromLTRB(16.0, 0, 16, 20),
+                          child: GestureDetector(
+                            onTap: () {
+                              Get.toNamed('/single_publisher');
+                            },
+                            child: Obx(() {
+                              return PublisherCard(
+                                isOnPage: true
+                                    .obs, //this let the follow button to showup based on the page user in [or other parameter as needed]
+                                category: newsItem['Category'],
+                                imageSource: newsItem['imageSource'],
+                                heading: newsItem['heading'],
+                                publisher: newsItem['publisher'],
+                                publisherLogo: newsItem['publisherLogo'],
+                                date: newsItem['date'],
+                              );
+                            }),
+                          ),
+                        );
+                      },
+                      childCount: homecontroller.filteredList.length,
+                    ),
+                  )
+                : SliverToBoxAdapter(
+                    child: SizedBox(
+                      height: 605,
+                      width: MediaQuery.of(context).size.width,
+                      child: PublisherShimmerEffect(),
+                    ),
+                  );
+          })
         ],
       ),
     );

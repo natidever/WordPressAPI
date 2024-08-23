@@ -6,13 +6,15 @@ class HomeController extends GetxController {
   // This list fakes API RESPONSE DATA FROM OUR BACKEND
 
   @override
-  @override
   void onInit() {
     super.onInit();
-    delay(); // Call fetchData method when controller initializes
+    delay();
+    filteredList.value = publisherList;
+    // Call fetchData method when controller initializes
   }
 
   RxBool isLoading = true.obs;
+  RxBool isOnPage = false.obs;
 
   void delay() {
     Future.delayed(Duration(seconds: 3), () {
@@ -73,4 +75,19 @@ class HomeController extends GetxController {
       "date": "Jun 9,2024",
     },
   ];
+
+  final filteredList = <Map<String, dynamic>>[].obs;
+
+  void filterPublisherList(String query) {
+    if (query.isEmpty) {
+      filteredList.value = publisherList;
+    } else {
+      filteredList.value = publisherList.where((newsItem) {
+        final lowerQuery = query.toLowerCase();
+        return newsItem['Category'].toLowerCase().contains(lowerQuery) ||
+            newsItem['heading'].toLowerCase().contains(lowerQuery) ||
+            newsItem['publisher'].toLowerCase().contains(lowerQuery);
+      }).toList();
+    }
+  }
 }

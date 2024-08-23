@@ -105,14 +105,17 @@ class Homepage extends StatelessWidget {
                             onTap: () {
                               Get.toNamed('/single_publisher');
                             },
-                            child: PublisherCard(
-                              category: newsItem['Category'],
-                              imageSource: newsItem['imageSource'],
-                              heading: newsItem['heading'],
-                              publisher: newsItem['publisher'],
-                              publisherLogo: newsItem['publisherLogo'],
-                              date: newsItem['date'],
-                            ),
+                            child: Obx(() {
+                              return PublisherCard(
+                                isOnPage: false.obs,
+                                category: newsItem['Category'],
+                                imageSource: newsItem['imageSource'],
+                                heading: newsItem['heading'],
+                                publisher: newsItem['publisher'],
+                                publisherLogo: newsItem['publisherLogo'],
+                                date: newsItem['date'],
+                              );
+                            }),
                           ),
                         );
                       },

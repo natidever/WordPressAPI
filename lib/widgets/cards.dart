@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:news_app/controllers/home_controller.dart';
 import 'package:news_app/utils/constants.dart';
 import 'package:news_app/widgets/custom_buttons.dart';
 import 'package:news_app/widgets/custom_texts.dart';
@@ -104,6 +106,7 @@ Widget TrendingNewsCard(
 
 Widget PublisherCard(
     {String? category,
+    RxBool? isOnPage, // Add t
     String? imageSource,
     String? heading,
     String? publisher,
@@ -114,7 +117,8 @@ Widget PublisherCard(
     height: 404,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(10),
-      color: Color.fromRGBO(249, 252, 254, 1),
+      // color: Color.fromRGBO(249, 252, 254, 1),
+      color: Color.fromRGBO(227, 239, 249, 1),
       // color: Colors.black
     ),
     child: Padding(
@@ -174,7 +178,8 @@ Widget PublisherCard(
                 child: Row(
                   children: [
                     //foolow,
-                    FollowButton(),
+
+                    isOnPage == false ? FollowButton() : Text(''),
 
                     Padding(
                         padding: const EdgeInsets.all(8.0),
