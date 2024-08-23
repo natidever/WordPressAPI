@@ -101,7 +101,7 @@ Widget FollowButton() {
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Center(child: TertiaryText500(14, "Follow")),
+        child: Center(child: SecondaryText600(fontSize: 14, text: "Follow")),
       ));
 }
 

@@ -256,7 +256,7 @@ Widget ListOfPublisher({
           padding: const EdgeInsets.fromLTRB(0.0, 0, 00, 15),
           child: TertiaryText500(18, publisherName ?? "Unknown"),
         ),
-        Container(width: 130, height: 34, child: FollowButton())
+        Container(width: 130, height: 40, child: FollowButton())
       ],
     ),
     height: 167,
