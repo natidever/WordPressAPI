@@ -91,7 +91,7 @@ Widget ActionBarButton({IconData? icon, bool? iconFound, String? imageSource}) {
 Widget FollowButton() {
   return Container(
       width: 91,
-      height: 37,
+      height: 34,
       decoration: BoxDecoration(
         color: Color.fromRGBO(236, 236, 237, 1),
         borderRadius: BorderRadius.circular(7),

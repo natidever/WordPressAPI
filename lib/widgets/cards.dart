@@ -115,9 +115,10 @@ Widget PublisherCard(
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(10),
       color: Color.fromRGBO(249, 252, 254, 1),
+      // color: Colors.black
     ),
     child: Padding(
-      padding: const EdgeInsets.fromLTRB(16.0, 16, 0, 0),
+      padding: const EdgeInsets.fromLTRB(16.0, 16, 16, 4),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -135,7 +136,7 @@ Widget PublisherCard(
                           height: 36,
                           child: Image.asset(
                               fit: BoxFit.cover,
-                              'assets/images/icons/publisher3.png'))),
+                              publisherLogo ?? 'path/to/default/logo'))),
                   Padding(
                     padding: const EdgeInsets.only(left: 12.0),
                     child: Column(
@@ -145,7 +146,9 @@ Widget PublisherCard(
                           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                           children: [
-                            SubText(text: "Forbes", isheading: true),
+                            SubText(
+                                text: publisher ?? 'Uknown publisher',
+                                isheading: true),
                             Padding(
                               padding: const EdgeInsets.only(left: 8.0),
                               child: Image.asset(
@@ -156,7 +159,7 @@ Widget PublisherCard(
                             )
                           ],
                         ),
-                        SubText(text: "June 10,2024")
+                        SubText(text: date ?? "now")
                       ],
                     ),
                   )
@@ -185,45 +188,41 @@ Widget PublisherCard(
             ],
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 26.0),
+            padding: const EdgeInsets.only(top: 23.0),
             child: Container(
                 width: 360,
                 height: 56,
-                child: PrimaryText700(
-                    fontSize: 20.0,
-                    text:
-                        "Tech Startup Secures \$50 Million Funding for Expansion")),
+                child:
+                    PrimaryText700(fontSize: 20.0, text: heading ?? "Heading")),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6),
-                  border: Border.all(
-                    color: Color.fromRGBO(42, 186, 255, 1),
-                  )),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 6, 10, 6),
-                child: Text(
-                  "Business",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Color.fromRGBO(42, 186, 255, 1),
+              padding: const EdgeInsets.fromLTRB(0, 8, 0, 16),
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(
+                      color: Color.fromRGBO(42, 186, 255, 1),
+                    )),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 6, 10, 6),
+                  child: Text(
+                    category ?? "All",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Color.fromRGBO(42, 186, 255, 1),
+                    ),
                   ),
                 ),
-              ),
-              // width: Hug (73px)px;
-              // height: Hug (30px)px;
-              // top: 144px;
-              // left: 16px;
-              // padding: 6px 10px 6px 10px;
-              // gap: 10px;
-              // border-radius: 6px 0px 0px 0px;
-              // border: 1px 0px 0px 0px;
-              // opacity: 0px;
-            ),
-          )
+              )),
+          ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Container(
+                width: 360,
+                height: 197,
+                child: Image.asset(
+                    fit: BoxFit.cover, imageSource ?? "path/to/default/image/"),
+              ))
         ],
       ),
     ),
