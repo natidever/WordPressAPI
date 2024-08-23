@@ -13,7 +13,9 @@ Widget PrimaryText700({
 }
 
 Widget TertiaryText500(double fontSize, String text) {
-  return Text(text, style: GoogleFonts.roboto(fontWeight: FontWeight.w500));
+  return Text(text,
+      style:
+          GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: fontSize));
 }
 
 Widget SecondaryText600({required double fontSize, required String text}) {

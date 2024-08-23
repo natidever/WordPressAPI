@@ -42,6 +42,7 @@ dependencies:
   google_fonts: ^6.2.1
   google_nav_bar: ^5.0.6
   shimmer: ^3.0.0
+  getwidget: ^4.0.0
 
 
 

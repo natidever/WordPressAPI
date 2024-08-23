@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:getwidget/components/dropdown/gf_dropdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/utils/constants.dart';
 import 'package:news_app/widgets/custom_buttons.dart';
 import 'package:news_app/widgets/custom_texts.dart';
 import 'package:news_app/widgets/layout_helper.dart';
 
-class SinglePublisher extends StatelessWidget {
-  const SinglePublisher({super.key});
+class SinglePublisher extends StatefulWidget {
+  @override
+  State<SinglePublisher> createState() => _SinglePublisherState();
+}
+
+class _SinglePublisherState extends State<SinglePublisher> {
+  // const SinglePublisher({super.key});
+  String? dropdownValue = "Enviroment";
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: white,
       appBar: AppBar(
@@ -119,6 +129,78 @@ class SinglePublisher extends StatelessWidget {
                     )
                   ],
                 ),
+              ),
+            ),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.only(left: 16),
+            sliver: SliverToBoxAdapter(
+              child: Row(
+                children: [
+                  SecondaryText600(fontSize: 24, text: "Forbes"),
+                  HorizontalSpace(8),
+                  Image.asset(
+                      width: 20, height: 20, 'assets/images/icons/verified.png')
+                ],
+              ),
+            ),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.only(left: 16),
+            sliver: SliverToBoxAdapter(
+              child: SubText(
+                  isheading: false,
+                  text:
+                      "Empowering your business journey with expert insights and influential perspectives."),
+            ),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(16, 32, 16, 0),
+            sliver: SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TertiaryText500(20, "News by forbes"),
+                  Row(
+                    children: [
+                      SubText(text: "Sort by:"),
+                      Container(
+                        height: 45,
+
+                        // margin: EdgeInsets.all(20),
+                        child: DropdownButtonHideUnderline(
+                          child: GFDropdown(
+                            // itemHeight: 60,
+                            padding: const EdgeInsets.all(10),
+                            border: BorderSide.none,
+                            dropdownButtonColor: Colors.white,
+                            value: dropdownValue,
+                            onChanged: (newValue) {
+                              setState(() {
+                                dropdownValue = newValue;
+                              });
+                            },
+                            items: [
+                              'Enviroment',
+                              'Technology',
+                              'Politics',
+                              'Sport'
+                            ]
+                                .map((value) => DropdownMenuItem(
+                                      value: value,
+                                      child: Text(value),
+                                    ))
+                                .toList(),
+                          ),
+                        ),
+                      ),
+                      HorizontalSpace(size.width * 0.3),
+                      Image.asset('assets/images/icons/side1.png'),
+                      HorizontalSpace(size.width * 0.03),
+                      Image.asset('assets/images/icons/side2.png')
+                    ],
+                  )
+                ],
               ),
             ),
           )
