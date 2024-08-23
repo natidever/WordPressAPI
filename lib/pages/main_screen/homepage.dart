@@ -111,9 +111,9 @@ class Homepage extends StatelessWidget {
                   )
                 : SliverToBoxAdapter(
                     child: SizedBox(
-                      height: 305,
+                      height: 605,
                       width: MediaQuery.of(context).size.width,
-                      child: TrendingShimmerEffect(),
+                      child: PublisherShimmerEffect(),
                     ),
                   );
           }),

@@ -130,7 +130,7 @@ Widget PublisherCard(
                   child: Row(
                 children: [
                   ClipRRect(
-                      borderRadius: BorderRadius.circular(4),
+                      borderRadius: BorderRadius.circular(10),
                       child: Container(
                           width: 36,
                           height: 36,
