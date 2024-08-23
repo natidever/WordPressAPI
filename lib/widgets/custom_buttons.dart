@@ -80,8 +80,13 @@ Widget ActionBarButton({IconData? icon, bool? iconFound, String? imageSource}) {
         borderRadius: BorderRadius.circular(10)),
     child: Padding(
         padding: const EdgeInsets.all(5.0),
-        child:
-            iconFound == false ? Image.asset(imageSource ?? "") : Icon(icon)),
+        child: iconFound == false
+            ? Image.asset(
+                imageSource ?? "",
+                width: 2,
+                height: 30,
+              )
+            : Icon(icon)),
     //   size:52
     // border--10
     // iconsize=24

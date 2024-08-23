@@ -141,6 +141,7 @@ Widget PublisherCard(
                     padding: const EdgeInsets.only(left: 12.0),
                     child: Column(
                       // mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           // mainAxisAlignment: MainAxisAlignment.spaceBetween,

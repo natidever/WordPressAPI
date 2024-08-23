@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app/controllers/home_controller.dart';
+import 'package:news_app/utils/constants.dart';
 import 'package:news_app/widgets/cards.dart';
 import 'package:news_app/widgets/custom_buttons.dart';
 import 'package:news_app/widgets/custom_texts.dart';
@@ -13,8 +14,12 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        // backgroundColor: white,
+        elevation: 0,
+        backgroundColor: white,
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(30),
           child: Padding(
@@ -96,13 +101,18 @@ class Homepage extends StatelessWidget {
                         final newsItem = homecontroller.publisherList[index];
                         return Padding(
                           padding: const EdgeInsets.fromLTRB(16.0, 0, 16, 20),
-                          child: PublisherCard(
-                            category: newsItem['Category'],
-                            imageSource: newsItem['imageSource'],
-                            heading: newsItem['heading'],
-                            publisher: newsItem['publisher'],
-                            publisherLogo: newsItem['publisherLogo'],
-                            date: newsItem['date'],
+                          child: GestureDetector(
+                            onTap: () {
+                              Get.toNamed('/single_publisher');
+                            },
+                            child: PublisherCard(
+                              category: newsItem['Category'],
+                              imageSource: newsItem['imageSource'],
+                              heading: newsItem['heading'],
+                              publisher: newsItem['publisher'],
+                              publisherLogo: newsItem['publisherLogo'],
+                              date: newsItem['date'],
+                            ),
                           ),
                         );
                       },

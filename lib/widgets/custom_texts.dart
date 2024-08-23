@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/utils/constants.dart';
 
-Widget PrimaryText700({required double fontSize, required String text}) {
+Widget PrimaryText700({
+  required double fontSize,
+  required String text,
+}) {
   return Text(text,
       // textAlign: TextAlign.start,
       style:

@@ -5,6 +5,7 @@ import 'package:news_app/pages/main_screen/discover.dart';
 import 'package:news_app/pages/main_screen/homepage.dart';
 import 'package:news_app/pages/login.dart';
 import 'package:news_app/pages/main_screen/profile.dart';
+import 'package:news_app/pages/main_screen/single_publisher.dart';
 import 'package:news_app/pages/onboarding/onboarding.dart';
 
 class AppRoutes {
@@ -17,6 +18,7 @@ class AppRoutes {
   static const bookmark = '/bookmark';
   static const discover = '/discover';
   static const profile = '/profile';
+  static const single_publisher = '/single_publisher';
 
   // Define the routes map u
   static List<GetPage> routes = [
@@ -27,5 +29,6 @@ class AppRoutes {
     GetPage(name: bookmark, page: () => Bookmark()),
     GetPage(name: discover, page: () => Discover()),
     GetPage(name: profile, page: () => Profile()),
+    GetPage(name: single_publisher, page: () => SinglePublisher()),
   ];
 }
