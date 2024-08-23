@@ -116,7 +116,7 @@ Widget CustomSearchBar(
     decoration: BoxDecoration(
         // color: Color.fromRGBO(63, 63, 64, 1),
         // color: Colors.amber,
-        color: Color.fromRGBO(227, 239, 249, 1),
+        color: Color.fromRGBO(227, 239, 249, 0.3),
         // color: Color.fromRGBO(236, 239, 239, 1),
         borderRadius: BorderRadius.circular(10)),
 

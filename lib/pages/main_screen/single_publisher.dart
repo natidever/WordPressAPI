@@ -39,7 +39,12 @@ class _SinglePublisherState extends State<SinglePublisher> {
             child: Row(
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ActionBarButton(iconFound: true, icon: Icons.arrow_back),
+                GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: ActionBarButton(
+                        iconFound: true, icon: Icons.arrow_back)),
                 HorizontalSpace(15),
                 PrimaryText700(fontSize: 22, text: "Forbes News"),
                 HorizontalSpace(140),

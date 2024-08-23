@@ -234,3 +234,38 @@ Widget PublisherCard(
     ),
   );
 }
+
+Widget ListOfPublisher({
+  String? publisherName,
+  String? logo,
+}) {
+  return Container(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+          child: Container(
+            width: 60,
+            height: 60,
+            child: Image.asset(fit: BoxFit.cover, logo ?? ""),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0.0, 0, 00, 15),
+          child: TertiaryText500(18, publisherName ?? "Unknown"),
+        ),
+        Container(width: 130, height: 34, child: FollowButton())
+      ],
+    ),
+    height: 167,
+    width: 147,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
+      color: Color.fromRGBO(227, 239, 249, 0.3),
+
+      // color: Color.fromRGBO(249, 252, 254, 1),
+    ),
+  );
+}
