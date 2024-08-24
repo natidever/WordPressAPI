@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getwidget/components/dropdown/gf_dropdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/controllers/search_controller.dart';
 import 'package:news_app/utils/constants.dart';
@@ -16,6 +17,7 @@ class Search extends StatefulWidget {
 late TabController tabController;
 
 class _SearchState extends State<Search> with TickerProviderStateMixin {
+  String? dropdownValue = "Enviroment";
   @override
   void initState() {
     super.initState();
@@ -508,6 +510,39 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: Row(
+                children: [
+                  SubText(text: "600 Results Found"),
+                  Container(
+                    height: 45,
+
+                    // margin: EdgeInsets.all(20),
+                    child: DropdownButtonHideUnderline(
+                      child: GFDropdown(
+                        // itemHeight: 60,
+                        padding: const EdgeInsets.all(10),
+                        border: BorderSide.none,
+                        dropdownButtonColor: Colors.white,
+                        value: dropdownValue,
+                        onChanged: (newValue) {
+                          setState(() {
+                            dropdownValue = newValue;
+                          });
+                        },
+                        items: ['Enviroment', 'Technology', 'Politics', 'Sport']
+                            .map((value) => DropdownMenuItem(
+                                  value: value,
+                                  child: Text(value),
+                                ))
+                            .toList(),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
             SizedBox(
               height: size.height,
               child: TabBarView(
@@ -553,18 +588,43 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                                                 ),
                                               )),
                                         ),
-                                        Row(
-                                          children: [
-                                            Container(
-                                              child: Row(
-                                                children: [
-                                                  Image.asset(
-                                                      'assets/images/icons/publisher1.png'),
-                                                  SubText(text: "BBC News"),
-                                                ],
-                                              ),
-                                            )
-                                          ],
+                                        Expanded(
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8.0),
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        child: Container(
+                                                          width: 24,
+                                                          height: 24,
+                                                          child: Image.asset(
+                                                              'assets/images/icons/publisher1.png'),
+                                                        ),
+                                                      ),
+                                                      HorizontalSpace(5),
+                                                      SubText(text: "BBC News"),
+                                                      HorizontalSpace(5),
+                                                      Image.asset(
+                                                          width: 16,
+                                                          height: 16,
+                                                          'assets/images/icons/verified.png')
+                                                    ],
+                                                  ),
+                                                ),
+                                                SubText(text: "June 10 ,2024")
+                                              ],
+                                            ),
+                                          ),
                                         )
                                       ],
                                     ),
