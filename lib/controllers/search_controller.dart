@@ -1,14 +1,13 @@
 import 'package:get/get.dart';
 
 class CusomSearchController extends GetxController {
-  var selectedCategory = ''.obs;
+  var selectedCategories = <String>[].obs;
 
-//this function used to ta
   void toggleCategory(String category) {
-    if (selectedCategory.value == category) {
-      selectedCategory.value = ''; // Deselect if already selectedP
+    if (selectedCategories.contains(category)) {
+      selectedCategories.remove(category);
     } else {
-      selectedCategory.value = category; // Select the new category
+      selectedCategories.add(category);
     }
   }
 

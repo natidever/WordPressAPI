@@ -216,69 +216,65 @@ class _SearchState extends State<Search> {
                                         ),
 
                                         Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 18.0),
-                                          child: Obx(() {
-                                            return Wrap(
-                                              spacing: 10,
+                                            padding: const EdgeInsets.only(
+                                                left: 18.0),
+                                            child: Wrap(
+                                              spacing: 7,
                                               runSpacing: 10,
                                               children: categories2
                                                   .map((
                                                     category,
                                                   ) =>
-                                                      Obx(() => GestureDetector(
-                                                            onTap: () {
-                                                              controller
-                                                                  .toggleCategory(
-                                                                      category);
-                                                              // productSelector.prizeCategory =
-                                                              //     controller.selectedCategory;
-                                                            },
-                                                            child: Container(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: controller
-                                                                        .selectedCategory
-                                                                        .contains(
-                                                                            category)
-                                                                    ? overlayBackground
-                                                                    : null,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          controller
+                                                              .toggleCategory(
+                                                                  category);
+                                                        },
+                                                        child:
+                                                            Obx(() => Container(
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: Colors
+                                                                        .transparent,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
                                                                             10),
-                                                                border:
-                                                                    Border.all(
-                                                                  color:
-                                                                      radiusColor, // Change border color for last element
-                                                                ),
-                                                              ),
-                                                              child: Padding(
-                                                                padding: const EdgeInsets
-                                                                    .symmetric(
-                                                                    horizontal:
-                                                                        10,
-                                                                    vertical:
-                                                                        10),
-                                                                child: Text(
-                                                                  category,
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color: Color
-                                                                        .fromARGB(
+                                                                    border:
+                                                                        Border
+                                                                            .all(
+                                                                      color: controller
+                                                                              .selectedCategories
+                                                                              .contains(category)
+                                                                          ? customBlue
+                                                                          : radiusColor,
+                                                                    ),
+                                                                  ),
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                        horizontal:
+                                                                            10,
+                                                                        vertical:
+                                                                            10),
+                                                                    child: Text(
+                                                                      category,
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: const Color
+                                                                            .fromARGB(
                                                                             255,
                                                                             121,
                                                                             121,
                                                                             121),
+                                                                      ),
+                                                                    ),
                                                                   ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          )))
+                                                                )),
+                                                      ))
                                                   .toList(),
-                                            );
-                                          }),
-                                        )
+                                            ))
                                       ],
                                     );
                                   }),
@@ -293,7 +289,7 @@ class _SearchState extends State<Search> {
                         child: Container(
                           decoration: BoxDecoration(
                             color:
-                                controller.selectedCategory.contains(category)
+                                controller.selectedCategories.contains(category)
                                     ? overlayBackground
                                     : null,
                             borderRadius: BorderRadius.circular(10),
