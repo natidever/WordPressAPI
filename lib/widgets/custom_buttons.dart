@@ -107,7 +107,9 @@ Widget FollowButton() {
 
 Widget CustomSearchBar(
     {TextEditingController? textEditingController,
-    Function(String)? onchanged}) {
+    Function(String)? onchanged,
+    Function()? ontap,
+    bool? readOnly}) {
   return Container(
     // 392*64
     width: 392,
@@ -121,6 +123,8 @@ Widget CustomSearchBar(
         borderRadius: BorderRadius.circular(10)),
 
     child: TextFormField(
+      onTap: ontap,
+      readOnly: readOnly ?? false,
       onChanged: onchanged,
       controller: textEditingController,
       obscureText: false,

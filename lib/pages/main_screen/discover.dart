@@ -90,7 +90,16 @@ class _DiscoverState extends State<Discover> with TickerProviderStateMixin {
                     VerticalSpace(size.height * 0.03),
                     Padding(
                       padding: const EdgeInsets.only(right: 0.0),
-                      child: CustomSearchBar(),
+                      child: Material(
+                        color: Colors
+                            .transparent, // Make it transparent if you don't want to change the appearance
+
+                        child: CustomSearchBar(
+                            readOnly: true,
+                            ontap: () {
+                              Get.toNamed('/search');
+                            }),
+                      ),
                     ),
                     VerticalSpace(size.height * 0.02),
                     Row(
@@ -114,7 +123,7 @@ class _DiscoverState extends State<Discover> with TickerProviderStateMixin {
                               dicoverController.listOfPublisher[index];
                           return GestureDetector(
                             onTap: () {
-                              Get.toNamed('/');
+                              // Get.toNamed('/');
                             },
                             child: Padding(
                               padding:

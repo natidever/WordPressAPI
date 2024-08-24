@@ -7,3 +7,5 @@ const black = Color.fromRGBO(0, 0, 0, 0);
 const customTextColor = Color.fromRGBO(26, 26, 26, 1);
 const subTextColor = Color.fromRGBO(153, 153, 153, 1);
 const radiusColor = Color.fromRGBO(220, 219, 219, 1);
+const overlayBackground = Color.fromRGBO(227, 246, 255, 1);
+const customBlue = Color.fromRGBO(42, 186, 255, 1);
