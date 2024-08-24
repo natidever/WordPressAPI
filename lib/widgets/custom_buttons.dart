@@ -12,6 +12,7 @@ Widget CustomPrimaryButton(
   double width,
   double height,
   double borderRadius, {
+  Color textColor = Colors.white,
   Color color = primaryColor,
 }) {
   return Container(
@@ -25,7 +26,7 @@ Widget CustomPrimaryButton(
           style: GoogleFonts.inter(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: white,
+            color: textColor,
           )),
     ),
     height: height,

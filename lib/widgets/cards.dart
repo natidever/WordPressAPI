@@ -269,3 +269,5 @@ Widget ListOfPublisher({
     ),
   );
 }
+
+// Widget SearchedList(){}

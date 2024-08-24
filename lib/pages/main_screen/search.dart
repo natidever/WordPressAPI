@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/controllers/search_controller.dart';
 import 'package:news_app/utils/constants.dart';
+import 'package:news_app/widgets/cards.dart';
 import 'package:news_app/widgets/custom_buttons.dart';
 import 'package:news_app/widgets/custom_texts.dart';
 import 'package:news_app/widgets/layout_helper.dart';
@@ -11,9 +13,28 @@ class Search extends StatefulWidget {
   State<Search> createState() => _SearchState();
 }
 
-class _SearchState extends State<Search> {
+late TabController tabController;
+
+class _SearchState extends State<Search> with TickerProviderStateMixin {
+  @override
+  void initState() {
+    super.initState();
+
+    tabController = TabController(length: tabBarList.length, vsync: this);
+
+    currentIndex.listen((newindex) {
+      print('newindex$newindex');
+    });
+    tabController.addListener(handelevent);
+    super.initState();
+  }
+
   // const Search({super.key});
   final controller = Get.find<CusomSearchController>();
+  void handelevent() {
+    currentIndex.value = tabController.index;
+    print('currentIndexxx$currentIndex');
+  }
 
   String? selectedValue;
 
@@ -26,6 +47,8 @@ class _SearchState extends State<Search> {
     'South america',
     "Add Filter"
   ];
+  List tabBarList = ['News', "Publisher"];
+  RxInt currentIndex = 0.obs;
 
   final List<String> categories2 = [
     'Business',
@@ -46,6 +69,7 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: white,
@@ -97,7 +121,7 @@ class _SearchState extends State<Search> {
                               builder: (BuildContext context) {
                                 return Container(
                                   width: size.width,
-                                  height: size.height * 0.8,
+                                  height: size.height * 0.85,
                                   padding: EdgeInsets.only(left: 16),
                                   child: Obx(() {
                                     return Column(
@@ -117,59 +141,26 @@ class _SearchState extends State<Search> {
                                         ),
                                         // Radio buttons start here
 
-                                        Theme(
-                                          data: Theme.of(context).copyWith(
-                                            unselectedWidgetColor: Colors
-                                                .red, // Change this to your desired color
-                                          ),
-                                          child: RadioListTile<String>(
-                                            toggleable: true,
-                                            title: Text(
-                                              'Today',
-                                              style: TextStyle(
-                                                color: controller.selectedValue
-                                                            .value ==
-                                                        'Today'
-                                                    ? Colors.black
-                                                    : Colors.grey,
-                                              ),
-                                            ),
-                                            value: 'Today',
-                                            contentPadding: EdgeInsets.all(0),
-
-                                            groupValue:
-                                                controller.selectedValue.value,
-
-                                            activeColor:
-                                                customBlue, // Selected color
-                                            onChanged: (value) {
-                                              setState(() {
-                                                controller.selectedValue.value =
-                                                    value!;
-
-                                                controller
-                                                    .updateSelectedValue(value);
-                                              });
-                                            },
-                                          ),
-                                        ),
                                         RadioListTile<String>(
+                                          toggleable: true,
                                           title: Text(
-                                            'This Week',
+                                            'Today',
                                             style: TextStyle(
                                               color: controller.selectedValue
                                                           .value ==
-                                                      'This Month'
+                                                      'Today'
                                                   ? Colors.black
                                                   : Colors.grey,
                                             ),
                                           ),
-                                          value: 'This Week',
-                                          toggleable: true,
+                                          value: 'Today',
                                           contentPadding: EdgeInsets.all(0),
+
                                           groupValue:
                                               controller.selectedValue.value,
-                                          activeColor: Colors.blue,
+
+                                          activeColor:
+                                              customBlue, // Selected color
                                           onChanged: (value) {
                                             setState(() {
                                               controller.selectedValue.value =
@@ -180,7 +171,40 @@ class _SearchState extends State<Search> {
                                             });
                                           },
                                         ),
+
                                         RadioListTile<String>(
+                                          toggleable: true,
+                                          title: Text(
+                                            'This Week',
+                                            style: TextStyle(
+                                              color: controller.selectedValue
+                                                          .value ==
+                                                      'This Week'
+                                                  ? Colors.black
+                                                  : Colors.grey,
+                                            ),
+                                          ),
+                                          value: 'This Week',
+                                          contentPadding: EdgeInsets.all(0),
+
+                                          groupValue:
+                                              controller.selectedValue.value,
+
+                                          activeColor:
+                                              customBlue, // Selected color
+                                          onChanged: (value) {
+                                            setState(() {
+                                              controller.selectedValue.value =
+                                                  value!;
+
+                                              controller
+                                                  .updateSelectedValue(value);
+                                            });
+                                          },
+                                        ),
+
+                                        RadioListTile<String>(
+                                          toggleable: true,
                                           title: Text(
                                             'This Month',
                                             style: TextStyle(
@@ -193,10 +217,12 @@ class _SearchState extends State<Search> {
                                           ),
                                           value: 'This Month',
                                           contentPadding: EdgeInsets.all(0),
+
                                           groupValue:
                                               controller.selectedValue.value,
-                                          activeColor: Colors.blue,
-                                          toggleable: true,
+
+                                          activeColor:
+                                              customBlue, // Selected color
                                           onChanged: (value) {
                                             setState(() {
                                               controller.selectedValue.value =
@@ -209,15 +235,18 @@ class _SearchState extends State<Search> {
                                         ),
 
                                         Padding(
-                                          padding: const EdgeInsets.all(18.0),
-                                          child: SecondaryText600(
-                                              fontSize: 20,
-                                              text: 'Category(3)'),
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Obx(() {
+                                            return SecondaryText600(
+                                                fontSize: 20,
+                                                text:
+                                                    'Category(${controller.selectedItems.value})');
+                                          }),
                                         ),
 
                                         Padding(
                                             padding: const EdgeInsets.only(
-                                                left: 18.0),
+                                                left: 8.0),
                                             child: Wrap(
                                               spacing: 7,
                                               runSpacing: 10,
@@ -227,6 +256,8 @@ class _SearchState extends State<Search> {
                                                   ) =>
                                                       GestureDetector(
                                                         onTap: () {
+                                                          // controller
+                                                          //     .countItem();
                                                           controller
                                                               .toggleCategory(
                                                                   category);
@@ -262,19 +293,124 @@ class _SearchState extends State<Search> {
                                                                       category,
                                                                       style:
                                                                           TextStyle(
-                                                                        color: const Color
-                                                                            .fromARGB(
-                                                                            255,
-                                                                            121,
-                                                                            121,
-                                                                            121),
+                                                                        color: controller.selectedCategories.contains(category)
+                                                                            ? Colors
+                                                                                .black
+                                                                            : Color.fromARGB(
+                                                                                255,
+                                                                                131,
+                                                                                125,
+                                                                                125),
                                                                       ),
                                                                     ),
                                                                   ),
                                                                 )),
                                                       ))
                                                   .toList(),
-                                            ))
+                                            )),
+
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              8.0, 25, 10, 10),
+                                          child: Obx(() {
+                                            return SecondaryText600(
+                                                fontSize: 20,
+                                                text:
+                                                    'Location(${controller.selectedLocation.value})');
+                                          }),
+                                        ),
+
+                                        Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 8.0),
+                                            child: Wrap(
+                                              spacing: 7,
+                                              runSpacing: 10,
+                                              children: controller.location
+                                                  .map((
+                                                    category,
+                                                  ) =>
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          // controller
+                                                          //     .countItem();
+                                                          controller
+                                                              .toggleLocation(
+                                                                  category);
+                                                        },
+                                                        child:
+                                                            Obx(() => Container(
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: Colors
+                                                                        .transparent,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            10),
+                                                                    border:
+                                                                        Border
+                                                                            .all(
+                                                                      color: controller
+                                                                              .selectedLocations
+                                                                              .contains(category)
+                                                                          ? customBlue
+                                                                          : radiusColor,
+                                                                    ),
+                                                                  ),
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                        horizontal:
+                                                                            10,
+                                                                        vertical:
+                                                                            10),
+                                                                    child: Text(
+                                                                      category,
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: controller.selectedLocations.contains(category)
+                                                                            ? Colors
+                                                                                .black
+                                                                            : const Color.fromARGB(
+                                                                                255,
+                                                                                121,
+                                                                                121,
+                                                                                121),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                )),
+                                                      ))
+                                                  .toList(),
+                                            )),
+
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              0, 40, 5, 5),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              CustomPrimaryButton(
+                                                  textColor: Colors.black,
+                                                  color: Color.fromRGBO(
+                                                      225, 224, 224, 1),
+                                                  "Reset",
+                                                  190,
+                                                  55,
+                                                  10),
+                                              HorizontalSpace(5),
+                                              CustomPrimaryButton(
+                                                  textColor: Colors.white,
+                                                  color: Colors.black,
+                                                  "Done",
+                                                  190,
+                                                  55,
+                                                  10)
+                                            ],
+                                          ),
+                                        )
                                       ],
                                     );
                                   }),
@@ -315,6 +451,140 @@ class _SearchState extends State<Search> {
                 }).toList(),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16.0, 0, 0, 0),
+              child: DefaultTabController(
+                length: tabBarList.length,
+                child: Material(
+                  color: Colors.white,
+                  borderOnForeground: false,
+                  shadowColor: Colors.transparent,
+                  elevation: 0.0,
+                  child: TabBar(
+
+                      // indicatorColor: Colors.amberAccent,
+                      onTap: (value) async {
+                        currentIndex.value = tabController.index;
+                      },
+                      // unselectedLabelStyle: TextStyle(color: Colors.red),
+                      // padding: EdgeInsets.only(bottom: 10),
+                      labelPadding: EdgeInsets.all(10),
+                      //     ? EdgeInsets.fromLTRB(10, 0, 8, 0)
+                      //     : EdgeInsets.fromLTRB(0, 10, 10, 20),
+                      enableFeedback: false,
+                      indicator:
+                          UnderlineTabIndicator(borderSide: BorderSide.none),
+                      isScrollable: true,
+                      tabAlignment: TabAlignment.start,
+                      // padding: EdgeInsets.all(23),
+                      controller: tabController,
+                      splashFactory: NoSplash.splashFactory,
+                      tabs: List.generate(
+                          tabController.length,
+                          (index) => Obx(() {
+                                print('Current index$currentIndex');
+                                return Container(
+                                  decoration: BoxDecoration(
+                                      // color: Colors.white
+                                      // borderRadius: BorderRadius.circular(5),
+                                      ),
+                                  child: Center(
+                                      child: Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                    child: Text(tabBarList[index],
+                                        style: GoogleFonts.roboto(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize:
+                                                currentIndex.value == index
+                                                    ? 24
+                                                    : 20,
+                                            color: currentIndex.value == index
+                                                ? Colors.black
+                                                : subTextColor)),
+                                  )),
+                                );
+                              }))),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: size.height,
+              child: TabBarView(
+                controller: tabController,
+                children: tabBarList.map((tab) {
+                  return Center(
+                    child: ListView.builder(
+                      itemBuilder: (context, index) {
+                        // final newsItem = homecontroller.publisherList[index];
+
+                        return Padding(
+                          padding: const EdgeInsets.fromLTRB(16.0, 20, 16, 20),
+                          child: GestureDetector(
+                            onTap: () {
+                              Get.toNamed('/single_publisher');
+                            },
+                            child: Container(
+                              child: Row(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: Container(
+                                      width: 128,
+                                      height: 114,
+                                      child: Image.asset(
+                                          fit: BoxFit.cover,
+                                          'assets/images/appcontents/heading1.jpg'),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Container(
+                                              width: 258,
+                                              height: 72,
+                                              child: Text(
+                                                "Global Summit on Climate Change: Historic Agreement Reached",
+                                                style: GoogleFonts.roboto(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w800,
+                                                ),
+                                              )),
+                                        ),
+                                        Row(
+                                          children: [
+                                            Container(
+                                              child: Row(
+                                                children: [
+                                                  Image.asset(
+                                                      'assets/images/icons/publisher1.png'),
+                                                  SubText(text: "BBC News"),
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              width: 392,
+                              height: 144,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  color: Colors.white),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                }).toList(),
+              ),
+            )
           ],
         ),
       ),
