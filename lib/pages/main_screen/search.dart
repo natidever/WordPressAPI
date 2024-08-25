@@ -17,29 +17,6 @@ class Search extends StatefulWidget {
 late TabController tabController;
 
 class _SearchState extends State<Search> with TickerProviderStateMixin {
-  String? dropdownValue = "Enviroment";
-  @override
-  void initState() {
-    super.initState();
-
-    tabController = TabController(length: tabBarList.length, vsync: this);
-
-    currentIndex.listen((newindex) {
-      print('newindex$newindex');
-    });
-    tabController.addListener(handelevent);
-    super.initState();
-  }
-
-  // const Search({super.key});
-  final controller = Get.find<CusomSearchController>();
-  void handelevent() {
-    currentIndex.value = tabController.index;
-    print('currentIndexxx$currentIndex');
-  }
-
-  String? selectedValue;
-
   final List<String> categories = [
     'This Week',
     'Politics',
@@ -49,8 +26,6 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
     'South america',
     "Add Filter"
   ];
-  List tabBarList = ['News', "Publisher"];
-  RxInt currentIndex = 0.obs;
 
   final List<String> categories2 = [
     'Business',
@@ -66,6 +41,32 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
     "World",
     "Science",
   ];
+
+  // const Search({super.key});
+  final controller = Get.find<CusomSearchController>();
+
+  RxInt currentIndex = 0.obs;
+  String? dropdownValue = "Enviroment";
+  String? selectedValue;
+  List tabBarList = ['News', "Publisher"];
+
+  @override
+  void initState() {
+    super.initState();
+
+    tabController = TabController(length: tabBarList.length, vsync: this);
+
+    currentIndex.listen((newindex) {
+      print('newindex$newindex');
+    });
+    tabController.addListener(handelevent);
+    super.initState();
+  }
+
+  void handelevent() {
+    currentIndex.value = tabController.index;
+    print('currentIndexxx$currentIndex');
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -110,6 +110,7 @@ Widget CustomSearchBar(
     {TextEditingController? textEditingController,
     Function(String)? onchanged,
     Function()? ontap,
+    String? hintText,
     bool? readOnly}) {
   return Container(
     // 392*64
@@ -147,7 +148,7 @@ Widget CustomSearchBar(
           prefixIconColor: subTextColor,
           hintStyle: GoogleFonts.sourceSans3(
               fontSize: 18, fontWeight: FontWeight.w400, color: subTextColor),
-          hintText: 'Search \'News'),
+          hintText: hintText ?? 'Search \'News'),
     ),
   );
 }

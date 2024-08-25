@@ -9,7 +9,7 @@ class MainBinder extends Bindings {
   @override
   void dependencies() {
     Get.put(LoginController());
-    Get.lazyPut(() => HomeController());
+    Get.put(HomeController());
     Get.put(DiscoverController());
     Get.put(CusomSearchController());
   }
