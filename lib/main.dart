@@ -27,6 +27,7 @@ void main() {
 
     // Redirect to custom error page using GetX
     if (details.exception is! FlutterError) {
+      print('uuuuuuuuu${details.exception}');
       // Use GetX to navigate to the error page
       print('${details.exceptionAsString()}');
       Get.to(() => GlobalErrorScreen(

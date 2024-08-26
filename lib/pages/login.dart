@@ -60,7 +60,7 @@ class Login extends StatelessWidget {
                   height: 63,
                   decoration: BoxDecoration(
                       // color: Color.fromRGBO(63, 63, 64, 1),
-                      color: Color.fromRGBO(249, 252, 254, 1),
+                      color: Color.fromRGBO(243, 243, 243, 0.4),
 
                       // color: Color.fromRGBO(236, 239, 239, 1),
                       borderRadius: BorderRadius.circular(10)),
@@ -94,7 +94,9 @@ class Login extends StatelessWidget {
                   width: 392,
                   height: 63,
                   decoration: BoxDecoration(
-                      color: Color.fromRGBO(249, 252, 254, 1),
+                      // color: Color.fromRGBO(249, 252, 254, 1),
+                      color: Color.fromRGBO(243, 243, 243, 0.4),
+
                       // color: Color.fromRGBO(236, 239, 239, 1),
                       borderRadius: BorderRadius.circular(10)),
 

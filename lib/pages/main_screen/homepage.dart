@@ -13,6 +13,7 @@ class Homepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       // backgroundColor: white,
       appBar: AppBar(
@@ -69,13 +70,16 @@ class Homepage extends StatelessWidget {
                             itemBuilder: (context, index) {
                               final newsItem =
                                   homecontroller.trendingNewsData[index];
-                              return TrendingNewsCard(
-                                category: newsItem['Category'],
-                                imageSource: newsItem['imageSource'],
-                                heading: newsItem['heading'],
-                                publisher: newsItem['publisher'],
-                                publisherLogo: newsItem['publisherLogo'],
-                                date: newsItem['date'],
+                              return Padding(
+                                padding: const EdgeInsets.only(right: 8.0),
+                                child: TrendingNewsCard(
+                                  category: newsItem['Category'],
+                                  imageSource: newsItem['imageSource'],
+                                  heading: newsItem['heading'],
+                                  publisher: newsItem['publisher'],
+                                  publisherLogo: newsItem['publisherLogo'],
+                                  date: newsItem['date'],
+                                ),
                               );
                             },
                           ),
@@ -107,6 +111,7 @@ class Homepage extends StatelessWidget {
                             },
                             child: Obx(() {
                               return PublisherCard(
+                                space: size.width * 0.1,
                                 isOnPage: false.obs,
                                 category: newsItem['Category'],
                                 imageSource: newsItem['imageSource'],

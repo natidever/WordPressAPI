@@ -5,6 +5,7 @@ import 'package:news_app/controllers/home_controller.dart';
 import 'package:news_app/utils/constants.dart';
 import 'package:news_app/widgets/custom_buttons.dart';
 import 'package:news_app/widgets/custom_texts.dart';
+import 'package:news_app/widgets/layout_helper.dart';
 
 Widget TrendingNewsCard(
     {String? category,
@@ -20,7 +21,8 @@ Widget TrendingNewsCard(
         // height: 315,
         height: 305,
         decoration: BoxDecoration(
-          color: Color.fromRGBO(249, 252, 254, 1),
+          // color: Color.fromRGBO(249, 252, 254, 1),
+          color: customBackgroundColor,
           // color: Colors.black,
           borderRadius: BorderRadius.circular(10),
           // color: Colors.blacktop
@@ -105,7 +107,8 @@ Widget TrendingNewsCard(
 }
 
 Widget PublisherCard(
-    {String? category,
+    {double? space,
+    String? category,
     RxBool? isOnPage, // Add t
     String? imageSource,
     String? heading,
@@ -118,7 +121,12 @@ Widget PublisherCard(
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(10),
       // color: Color.fromRGBO(249, 252, 254, 1),
-      color: Color.fromRGBO(227, 239, 249, 1),
+      // color: Color.fromRGBO(227, 239, 249, 1),
+      color: customBackgroundColor,
+      // color: Colors.red
+
+      // color: Color.fromRGBO(249, 252, 254, 1),
+
       // color: Colors.black
     ),
     child: Padding(
@@ -174,21 +182,28 @@ Widget PublisherCard(
 
                   ),
 
-              Container(
-                child: Row(
-                  children: [
-                    //foolow,
+              HorizontalSpace(space ?? 0),
 
-                    isOnPage == false ? FollowButton() : Text(''),
+              Expanded(
+                child: Container(
+                  // width: 8/,
+                  // color: Color.fromARGB(255, 255, 68, 68),
+                  child: Row(
+                    children: [
+                      //foolow,
 
-                    Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Image.asset(
-                            height: 24,
-                            width: 24,
-                            'assets/images/icons/more.png'))
-                    //4dot
-                  ],
+                      isOnPage == false ? FollowButton() : Text(''),
+                      HorizontalSpace(5),
+
+                      Padding(
+                          padding: const EdgeInsets.only(right: 00.0),
+                          child: Image.asset(
+                              height: 24,
+                              width: 24,
+                              'assets/images/icons/more.png'))
+                      //4dot
+                    ],
+                  ),
                 ),
               )
             ],

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/components/dropdown/gf_dropdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/utils/constants.dart';
 import 'package:news_app/widgets/custom_texts.dart';
@@ -7,8 +8,14 @@ import 'package:news_app/widgets/layout_helper.dart';
 
 import '../../widgets/custom_buttons.dart';
 
-class Profile extends StatelessWidget {
-  const Profile({super.key});
+class Profile extends StatefulWidget {
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  // const Profile({super.key});
+  String? dropdownValue = "Newest";
 
   @override
   Widget build(BuildContext context) {
@@ -145,6 +152,52 @@ class Profile extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 32, 0, 10),
                 child: TertiaryText500(20, "Yours News"),
+              ),
+              Row(
+                children: [
+                  SubText(text: "Sort by:"),
+                  Container(
+                    height: 45,
+                    // margin: EdgeInsets.all(20),
+                    child: DropdownButtonHideUnderline(
+                      child: GFDropdown(
+                        // iconDisabledColor: primaryColor,
+                        iconEnabledColor: primaryColor,
+                        // itemHeight: 60,
+                        // dropdownColor: primaryColor,
+                        padding: const EdgeInsets.all(10),
+                        border: BorderSide.none,
+                        dropdownButtonColor: Colors.white,
+                        value: dropdownValue,
+                        onChanged: (newValue) {
+                          setState(() {
+                            dropdownValue = newValue;
+                          });
+                        },
+                        items: ['Newest', 'Popular', 'This Day', 'This Week']
+                            .map((value) => DropdownMenuItem(
+                                  value: value,
+                                  child: Text(value),
+                                ))
+                            .toList(),
+                      ),
+                    ),
+                  ),
+                  HorizontalSpace(size.width * 0.3),
+                  Image.asset('assets/images/icons/side1.png'),
+                  HorizontalSpace(size.width * 0.012),
+                  Image.asset('assets/images/icons/side2.png')
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                // crossAxisAlignment: CrossAxisAlignment.center,p
+                children: [
+                  Container(
+                    height: size.width * 0.6,
+                  ),
+                  Text("You don’t have any news, make some."),
+                ],
               )
             ],
           ),
