@@ -39,8 +39,8 @@ class _OnBoadingState extends State<OnBoading> {
               child: Center(
                 child: SizedBox(
                   // width: size.width * 0.8,
-                  // height: size.height * 0.59,
-                  height: 450,
+                  height: size.height * 0.52,
+                  // height: 450,
                   child: PageView(
                     controller: _controller,
                     children: [
@@ -105,8 +105,9 @@ class _OnBoadingState extends State<OnBoading> {
                 ),
               ),
             ),
-            // VerticalSpace(size.height * 0.048),
-            VerticalSpace(70),
+            VerticalSpace(size.height * 0.02),
+            // VerticalSpace(70),
+
             Padding(
               padding: const EdgeInsets.fromLTRB(21, 0, 21, 40),
               child: GestureDetector(

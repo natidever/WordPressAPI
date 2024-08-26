@@ -162,9 +162,11 @@ class Login extends StatelessWidget {
               VerticalSpace(39),
               Row(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                    child: HorizontalLine(height: 1, width: 140),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: HorizontalLine(height: 1, width: 140),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(right: 10.0),
@@ -173,9 +175,11 @@ class Login extends StatelessWidget {
                       style: TextStyle(fontWeight: FontWeight.w800),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: HorizontalLine(height: 1, width: 150),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: HorizontalLine(height: 1, width: 150),
+                    ),
                   ),
                 ],
               ),

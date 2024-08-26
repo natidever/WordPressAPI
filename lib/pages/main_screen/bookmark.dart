@@ -30,7 +30,7 @@ class Bookmark extends StatelessWidget {
                     width: 42,
                     height: 42,
                     child: ActionBarButton(
-                        iconFound: false,
+                        iconFound: true,
                         imageSource: 'assets/images/icons/more.png'),
                   ),
                 ],
@@ -115,7 +115,7 @@ class Bookmark extends StatelessWidget {
                             ),
                           ),
                           VerticalSpace(5),
-                          SecondaryText600(fontSize: 22, text: "Sports"),
+                          SecondaryText600(fontSize: 22, text: "Business"),
                           SubText(text: "5 Business")
                         ],
                       ),
