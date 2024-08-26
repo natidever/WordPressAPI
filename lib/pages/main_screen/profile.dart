@@ -12,6 +12,8 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -69,56 +71,63 @@ class Profile extends StatelessWidget {
                                 fit: BoxFit.cover,
                                 width: 108,
                                 height: 108,
-                                'assets/images/icons/publisher3.png'))),
-                    HorizontalSpace(28),
+                                'assets/images/appcontents/profile.png'))),
+                    HorizontalSpace(size.width * 0.05),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         //shoinfo in row
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              children: [
-                                PrimaryText700(fontSize: 20, text: "0"),
-                                SubText(text: 'News'),
-                                // PrimaryText700(fontSize: 18, text: "News"),
-                              ],
-                            ),
-                            HorizontalSpace(30),
-                            Column(
-                              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                PrimaryText700(fontSize: 20, text: "5"),
-                                SubText(text: 'Follower'),
-                                // PrimaryText700(fontSize: 18, text: "News"),
-                              ],
-                            ),
-                            HorizontalSpace(30),
-                            Column(
-                              children: [
-                                PrimaryText700(fontSize: 20, text: "10"),
-                                SubText(text: 'Following'),
-                                // PrimaryText700(fontSize: 18, text: "News"),
-                              ],
-                            ),
-                          ],
-                        ),
-                        VerticalSpace(15),
-                        Container(
-                          width: 230,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: Color.fromRGBO(225, 224, 224, 1),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 0.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                children: [
+                                  PrimaryText700(fontSize: 20, text: "0"),
+                                  SubText(text: 'News'),
+                                  // PrimaryText700(fontSize: 18, text: "News"),
+                                ],
+                              ),
+                              HorizontalSpace(30),
+                              Column(
+                                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  PrimaryText700(fontSize: 20, text: "5"),
+                                  SubText(text: 'Follower'),
+                                  // PrimaryText700(fontSize: 18, text: "News"),
+                                ],
+                              ),
+                              HorizontalSpace(30),
+                              Column(
+                                children: [
+                                  PrimaryText700(fontSize: 20, text: "10"),
+                                  SubText(text: 'Following'),
+                                  // PrimaryText700(fontSize: 18, text: "News"),
+                                ],
+                              ),
+                            ],
                           ),
-                          child: Center(
-                            child: Text(
-                              "Create News",
-                              style: GoogleFonts.roboto(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),
+                        ),
+                        VerticalSpace(
+                            MediaQuery.of(context).size.height * 0.02),
+                        Padding(
+                          padding: EdgeInsets.only(right: 2),
+                          child: Container(
+                            width: 230,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Color.fromRGBO(225, 224, 224, 1),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Create News",
+                                style: GoogleFonts.roboto(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black),
+                              ),
                             ),
                           ),
                         )
@@ -128,12 +137,15 @@ class Profile extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                padding: const EdgeInsets.fromLTRB(0, 32, 0, 9),
                 child: PrimaryText700(fontSize: 24, text: "Tayler Mason News"),
               ),
               SubText(
                   text: "This is Tayler Mason News,Enjoy ", isheading: true),
-              SecondaryText600(fontSize: 18, text: "Yours News")
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 32, 0, 10),
+                child: TertiaryText500(20, "Yours News"),
+              )
             ],
           ),
         ),

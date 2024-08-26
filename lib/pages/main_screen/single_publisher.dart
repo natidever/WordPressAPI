@@ -45,9 +45,9 @@ class _SinglePublisherState extends State<SinglePublisher> {
                     },
                     child: ActionBarButton(
                         iconFound: true, icon: Icons.arrow_back)),
-                HorizontalSpace(15),
+                HorizontalSpace(10),
                 PrimaryText700(fontSize: 22, text: "Forbes News"),
-                HorizontalSpace(140),
+                HorizontalSpace(size.width * 0.33),
                 Container(
                   width: 45,
                   height: 45,
@@ -63,7 +63,8 @@ class _SinglePublisherState extends State<SinglePublisher> {
       body: CustomScrollView(
         slivers: [
           SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+            // padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+            padding: EdgeInsets.fromLTRB(16, 20, 16, 32),
             sliver: SliverToBoxAdapter(
               child: Container(
                 height: 108,
@@ -85,7 +86,8 @@ class _SinglePublisherState extends State<SinglePublisher> {
                                 width: 108,
                                 height: 108,
                                 'assets/images/icons/publisher3.png'))),
-                    HorizontalSpace(28),
+                    // HorizontalSpace(28),
+                    HorizontalSpace(size.width * 0.036),
                     Column(
                       children: [
                         //shoinfo in row
@@ -206,7 +208,7 @@ class _SinglePublisherState extends State<SinglePublisher> {
                       ),
                       HorizontalSpace(size.width * 0.3),
                       Image.asset('assets/images/icons/side1.png'),
-                      HorizontalSpace(size.width * 0.03),
+                      HorizontalSpace(size.width * 0.012),
                       Image.asset('assets/images/icons/side2.png')
                     ],
                   )

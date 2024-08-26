@@ -91,8 +91,8 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                     },
                     child: ActionBarButton(
                         iconFound: true, icon: Icons.arrow_back)),
-                HorizontalSpace(15),
-                SizedBox(width: 328, child: CustomSearchBar())
+                HorizontalSpace(5),
+                SizedBox(width: size.width * 0.8, child: CustomSearchBar())
               ],
             ),
           ),
@@ -122,301 +122,294 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                               isScrollControlled: true,
                               context: context,
                               builder: (BuildContext context) {
-                                return Container(
-                                  width: size.width,
-                                  height: size.height * 0.85,
-                                  padding: EdgeInsets.only(left: 16),
-                                  child: Obx(() {
-                                    return Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SecondaryText600(
-                                            fontSize: 22, text: 'Filters'),
-                                        SubText(
-                                            isheading: true,
-                                            text: "Works only for news"),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 24.0),
-                                          child: SecondaryText600(
-                                              fontSize: 22, text: 'Date Range'),
-                                        ),
-                                        // Radio buttons start here
-
-                                        RadioListTile<String>(
-                                          toggleable: true,
-                                          title: Text(
-                                            'Today',
-                                            style: TextStyle(
-                                              color: controller.selectedValue
-                                                          .value ==
-                                                      'Today'
-                                                  ? Colors.black
-                                                  : Colors.grey,
-                                            ),
-                                          ),
-                                          value: 'Today',
-                                          contentPadding: EdgeInsets.all(0),
-
-                                          groupValue:
-                                              controller.selectedValue.value,
-
-                                          activeColor:
-                                              customBlue, // Selected color
-                                          onChanged: (value) {
-                                            setState(() {
-                                              controller.selectedValue.value =
-                                                  value!;
-
-                                              controller
-                                                  .updateSelectedValue(value);
-                                            });
-                                          },
-                                        ),
-
-                                        RadioListTile<String>(
-                                          toggleable: true,
-                                          title: Text(
-                                            'This Week',
-                                            style: TextStyle(
-                                              color: controller.selectedValue
-                                                          .value ==
-                                                      'This Week'
-                                                  ? Colors.black
-                                                  : Colors.grey,
-                                            ),
-                                          ),
-                                          value: 'This Week',
-                                          contentPadding: EdgeInsets.all(0),
-
-                                          groupValue:
-                                              controller.selectedValue.value,
-
-                                          activeColor:
-                                              customBlue, // Selected color
-                                          onChanged: (value) {
-                                            setState(() {
-                                              controller.selectedValue.value =
-                                                  value!;
-
-                                              controller
-                                                  .updateSelectedValue(value);
-                                            });
-                                          },
-                                        ),
-
-                                        RadioListTile<String>(
-                                          toggleable: true,
-                                          title: Text(
-                                            'This Month',
-                                            style: TextStyle(
-                                              color: controller.selectedValue
-                                                          .value ==
-                                                      'This Month'
-                                                  ? Colors.black
-                                                  : Colors.grey,
-                                            ),
-                                          ),
-                                          value: 'This Month',
-                                          contentPadding: EdgeInsets.all(0),
-
-                                          groupValue:
-                                              controller.selectedValue.value,
-
-                                          activeColor:
-                                              customBlue, // Selected color
-                                          onChanged: (value) {
-                                            setState(() {
-                                              controller.selectedValue.value =
-                                                  value!;
-
-                                              controller
-                                                  .updateSelectedValue(value);
-                                            });
-                                          },
-                                        ),
-
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Obx(() {
-                                            return SecondaryText600(
-                                                fontSize: 20,
-                                                text:
-                                                    'Category(${controller.selectedItems.value})');
-                                          }),
-                                        ),
-
-                                        Padding(
+                                return SingleChildScrollView(
+                                  child: Container(
+                                    width: size.width,
+                                    height: size.height * 0.93,
+                                    padding: EdgeInsets.only(left: 16),
+                                    child: Obx(() {
+                                      return Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SecondaryText600(
+                                              fontSize: 22, text: 'Filters'),
+                                          SubText(
+                                              isheading: true,
+                                              text: "Works only for news"),
+                                          Padding(
                                             padding: const EdgeInsets.only(
-                                                left: 8.0),
-                                            child: Wrap(
-                                              spacing: 7,
-                                              runSpacing: 10,
-                                              children: categories2
-                                                  .map((
-                                                    category,
-                                                  ) =>
-                                                      GestureDetector(
-                                                        onTap: () {
-                                                          // controller
-                                                          //     .countItem();
-                                                          controller
-                                                              .toggleCategory(
-                                                                  category);
-                                                        },
-                                                        child:
-                                                            Obx(() => Container(
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: Colors
-                                                                        .transparent,
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            10),
-                                                                    border:
-                                                                        Border
-                                                                            .all(
-                                                                      color: controller
-                                                                              .selectedCategories
-                                                                              .contains(category)
-                                                                          ? customBlue
-                                                                          : radiusColor,
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: const EdgeInsets
-                                                                        .symmetric(
-                                                                        horizontal:
-                                                                            10,
-                                                                        vertical:
-                                                                            10),
-                                                                    child: Text(
-                                                                      category,
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: controller.selectedCategories.contains(category)
-                                                                            ? Colors
-                                                                                .black
-                                                                            : Color.fromARGB(
-                                                                                255,
-                                                                                131,
-                                                                                125,
-                                                                                125),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                )),
-                                                      ))
-                                                  .toList(),
-                                            )),
-
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              8.0, 25, 10, 10),
-                                          child: Obx(() {
-                                            return SecondaryText600(
-                                                fontSize: 20,
-                                                text:
-                                                    'Location(${controller.selectedLocation.value})');
-                                          }),
-                                        ),
-
-                                        Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 8.0),
-                                            child: Wrap(
-                                              spacing: 7,
-                                              runSpacing: 10,
-                                              children: controller.location
-                                                  .map((
-                                                    category,
-                                                  ) =>
-                                                      GestureDetector(
-                                                        onTap: () {
-                                                          // controller
-                                                          //     .countItem();
-                                                          controller
-                                                              .toggleLocation(
-                                                                  category);
-                                                        },
-                                                        child:
-                                                            Obx(() => Container(
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: Colors
-                                                                        .transparent,
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            10),
-                                                                    border:
-                                                                        Border
-                                                                            .all(
-                                                                      color: controller
-                                                                              .selectedLocations
-                                                                              .contains(category)
-                                                                          ? customBlue
-                                                                          : radiusColor,
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: const EdgeInsets
-                                                                        .symmetric(
-                                                                        horizontal:
-                                                                            10,
-                                                                        vertical:
-                                                                            10),
-                                                                    child: Text(
-                                                                      category,
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: controller.selectedLocations.contains(category)
-                                                                            ? Colors
-                                                                                .black
-                                                                            : const Color.fromARGB(
-                                                                                255,
-                                                                                121,
-                                                                                121,
-                                                                                121),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                )),
-                                                      ))
-                                                  .toList(),
-                                            )),
-
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              0, 40, 5, 5),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              CustomPrimaryButton(
-                                                  textColor: Colors.black,
-                                                  color: Color.fromRGBO(
-                                                      225, 224, 224, 1),
-                                                  "Reset",
-                                                  190,
-                                                  55,
-                                                  10),
-                                              HorizontalSpace(5),
-                                              CustomPrimaryButton(
-                                                  textColor: Colors.white,
-                                                  color: Colors.black,
-                                                  "Done",
-                                                  190,
-                                                  55,
-                                                  10)
-                                            ],
+                                                top: 24.0),
+                                            child: SecondaryText600(
+                                                fontSize: 22,
+                                                text: 'Date Range'),
                                           ),
-                                        )
-                                      ],
-                                    );
-                                  }),
+                                          // Radio buttons start here
+
+                                          RadioListTile<String>(
+                                            toggleable: true,
+                                            title: Text(
+                                              'Today',
+                                              style: TextStyle(
+                                                color: controller.selectedValue
+                                                            .value ==
+                                                        'Today'
+                                                    ? Colors.black
+                                                    : Colors.grey,
+                                              ),
+                                            ),
+                                            value: 'Today',
+                                            contentPadding: EdgeInsets.all(0),
+
+                                            groupValue:
+                                                controller.selectedValue.value,
+
+                                            activeColor:
+                                                customBlue, // Selected color
+                                            onChanged: (value) {
+                                              setState(() {
+                                                controller.selectedValue.value =
+                                                    value!;
+
+                                                controller
+                                                    .updateSelectedValue(value);
+                                              });
+                                            },
+                                          ),
+
+                                          RadioListTile<String>(
+                                            toggleable: true,
+                                            title: Text(
+                                              'This Week',
+                                              style: TextStyle(
+                                                color: controller.selectedValue
+                                                            .value ==
+                                                        'This Week'
+                                                    ? Colors.black
+                                                    : Colors.grey,
+                                              ),
+                                            ),
+                                            value: 'This Week',
+                                            contentPadding: EdgeInsets.all(0),
+
+                                            groupValue:
+                                                controller.selectedValue.value,
+
+                                            activeColor:
+                                                customBlue, // Selected color
+                                            onChanged: (value) {
+                                              setState(() {
+                                                controller.selectedValue.value =
+                                                    value!;
+
+                                                controller
+                                                    .updateSelectedValue(value);
+                                              });
+                                            },
+                                          ),
+
+                                          RadioListTile<String>(
+                                            toggleable: true,
+                                            title: Text(
+                                              'This Month',
+                                              style: TextStyle(
+                                                color: controller.selectedValue
+                                                            .value ==
+                                                        'This Month'
+                                                    ? Colors.black
+                                                    : Colors.grey,
+                                              ),
+                                            ),
+                                            value: 'This Month',
+                                            contentPadding: EdgeInsets.all(0),
+
+                                            groupValue:
+                                                controller.selectedValue.value,
+
+                                            activeColor:
+                                                customBlue, // Selected color
+                                            onChanged: (value) {
+                                              setState(() {
+                                                controller.selectedValue.value =
+                                                    value!;
+
+                                                controller
+                                                    .updateSelectedValue(value);
+                                              });
+                                            },
+                                          ),
+
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Obx(() {
+                                              return SecondaryText600(
+                                                  fontSize: 20,
+                                                  text:
+                                                      'Category(${controller.selectedItems.value})');
+                                            }),
+                                          ),
+
+                                          Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8.0),
+                                              child: Wrap(
+                                                spacing: 7,
+                                                runSpacing: 10,
+                                                children: categories2
+                                                    .map((
+                                                      category,
+                                                    ) =>
+                                                        GestureDetector(
+                                                          onTap: () {
+                                                            // controller
+                                                            //     .countItem();
+                                                            controller
+                                                                .toggleCategory(
+                                                                    category);
+                                                          },
+                                                          child:
+                                                              Obx(
+                                                                  () =>
+                                                                      Container(
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          color:
+                                                                              Colors.transparent,
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(10),
+                                                                          border:
+                                                                              Border.all(
+                                                                            color: controller.selectedCategories.contains(category)
+                                                                                ? customBlue
+                                                                                : radiusColor,
+                                                                          ),
+                                                                        ),
+                                                                        child:
+                                                                            Padding(
+                                                                          padding: const EdgeInsets
+                                                                              .symmetric(
+                                                                              horizontal: 10,
+                                                                              vertical: 10),
+                                                                          child:
+                                                                              Text(
+                                                                            category,
+                                                                            style:
+                                                                                TextStyle(
+                                                                              color: controller.selectedCategories.contains(category) ? Colors.black : Color.fromARGB(255, 131, 125, 125),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      )),
+                                                        ))
+                                                    .toList(),
+                                              )),
+
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                8.0, 25, 10, 10),
+                                            child: Obx(() {
+                                              return SecondaryText600(
+                                                  fontSize: 20,
+                                                  text:
+                                                      'Location(${controller.selectedLocation.value})');
+                                            }),
+                                          ),
+
+                                          Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8.0),
+                                              child: Wrap(
+                                                spacing: 7,
+                                                runSpacing: 10,
+                                                children: controller.location
+                                                    .map((
+                                                      category,
+                                                    ) =>
+                                                        GestureDetector(
+                                                          onTap: () {
+                                                            // controller
+                                                            //     .countItem();
+                                                            controller
+                                                                .toggleLocation(
+                                                                    category);
+                                                          },
+                                                          child:
+                                                              Obx(
+                                                                  () =>
+                                                                      Container(
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          color:
+                                                                              Colors.transparent,
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(10),
+                                                                          border:
+                                                                              Border.all(
+                                                                            color: controller.selectedLocations.contains(category)
+                                                                                ? customBlue
+                                                                                : radiusColor,
+                                                                          ),
+                                                                        ),
+                                                                        child:
+                                                                            Padding(
+                                                                          padding: const EdgeInsets
+                                                                              .symmetric(
+                                                                              horizontal: 10,
+                                                                              vertical: 10),
+                                                                          child:
+                                                                              Text(
+                                                                            category,
+                                                                            style:
+                                                                                TextStyle(
+                                                                              color: controller.selectedLocations.contains(category) ? Colors.black : const Color.fromARGB(255, 121, 121, 121),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      )),
+                                                        ))
+                                                    .toList(),
+                                              )),
+
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                0, 40, 5, 5),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                // CustomPrimaryButton(
+                                                //     textColor: Colors.black,
+                                                //     color: Color.fromRGBO(
+                                                //         225, 224, 224, 1),
+                                                //     "Reset",
+                                                //     190,
+                                                //     55,
+                                                //     10),
+                                                CustomPrimaryButton(
+                                                    textColor: Colors.black,
+                                                    color: Color.fromRGBO(
+                                                        225, 224, 224, 1),
+                                                    "Reset",
+                                                    size.width * 0.45,
+                                                    55,
+                                                    10),
+
+                                                HorizontalSpace(0),
+                                                CustomPrimaryButton(
+                                                    textColor: Colors.white,
+                                                    color: Colors.black,
+                                                    "Done",
+                                                    size.width * 0.45,
+                                                    55,
+                                                    10)
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      );
+                                    }),
+                                  ),
                                 );
                               },
                             );
@@ -592,7 +585,7 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                                         Expanded(
                                           child: Padding(
                                             padding: const EdgeInsets.symmetric(
-                                                horizontal: 8.0),
+                                                horizontal: 2.0),
                                             child: Row(
                                               children: [
                                                 Container(
@@ -633,6 +626,7 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                                 ],
                               ),
                               width: 392,
+                              // width: size.width,
                               height: 144,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12),
