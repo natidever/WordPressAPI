@@ -34,15 +34,16 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.6
-  get: ^4.6.6
-  flutter_native_splash: ^2.4.1
-  smooth_page_indicator: ^1.2.0+3
-  carousel_slider: ^5.0.0
-  google_fonts: ^6.2.1
-  google_nav_bar: ^5.0.6
-  shimmer: ^3.0.0
-  getwidget: ^4.0.0
+  cupertino_icons: ^1.0.6             # Provides Cupertino (iOS-style) icons for Flutter apps.
+  get: ^4.6.6                        # State management and dependency injection solution.
+  flutter_native_splash: ^2.4.1      # Configures native splash screens for Flutter apps.
+  smooth_page_indicator: ^1.2.0+3    # Provides smooth page indicators for carousel or page view widgets(used in the boarding page).
+  carousel_slider: ^5.0.0           # A highly customizable carousel slider widget.
+  google_fonts: ^6.2.1               # Allows easy integration of Google Fonts into Flutter apps.
+  google_nav_bar: ^5.0.6             # Implements a customizable Google-style navigation bar.
+  shimmer: ^3.0.0                    # Adds shimmer effect to widgets for loading states.
+  getwidget: ^4.0.0                  # Provides a collection of pre-designed UI widgets for Flutter.
+
 
 
 
@@ -86,10 +87,10 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/
-    - assets/images/appcontents/
-    - assets/images/icons/
-    - assets/images/boarding/
+    - assets/.
+    # - assets/images/appcontents/
+    # - assets/images/icons/
+    # - assets/images/boarding/
     # - assets/images/
   #   - images/a_dot_ham.jpeg
 
