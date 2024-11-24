@@ -98,40 +98,29 @@ class Homepage extends StatelessWidget {
             ),
           ),
           Obx(() {
-            return homecontroller.isLoading.value == false
-                ? SliverList(
+            return homecontroller.isLoading.value
+                ? SliverToBoxAdapter(
+                    child: PublisherShimmerEffect(),
+                  )
+                : SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                        final newsItem = homecontroller.publisherList[index];
+                        final post = homecontroller.blogPosts[index];
                         return Padding(
                           padding: const EdgeInsets.fromLTRB(16.0, 0, 16, 20),
                           child: GestureDetector(
                             onTap: () {
                               Get.toNamed('/single_publisher');
                             },
-                            child: Obx(() {
-                              return PublisherCard(
-                                space: size.width * 0.1,
-                                isOnPage: false.obs,
-                                category: newsItem['Category'],
-                                imageSource: newsItem['imageSource'],
-                                heading: newsItem['heading'],
-                                publisher: newsItem['publisher'],
-                                publisherLogo: newsItem['publisherLogo'],
-                                date: newsItem['date'],
-                              );
-                            }),
+                            child: PublisherCard(
+                              space: size.width * 0.1,
+                              isOnPage: false.obs,
+                              post: post,
+                            ),
                           ),
                         );
                       },
-                      childCount: homecontroller.publisherList.length,
-                    ),
-                  )
-                : SliverToBoxAdapter(
-                    child: SizedBox(
-                      height: 605,
-                      width: MediaQuery.of(context).size.width,
-                      child: PublisherShimmerEffect(),
+                      childCount: homecontroller.blogPosts.length,
                     ),
                   );
           }),

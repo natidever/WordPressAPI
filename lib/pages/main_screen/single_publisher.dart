@@ -242,16 +242,18 @@ class _SinglePublisherState extends State<SinglePublisher> {
                               Get.toNamed('/single_publisher');
                             },
                             child: Obx(() {
-                              return PublisherCard(
-                                isOnPage: true
-                                    .obs, //this let the follow button to showup based on the page user in [or other parameter as needed]
-                                category: newsItem['Category'],
-                                imageSource: newsItem['imageSource'],
-                                heading: newsItem['heading'],
-                                publisher: newsItem['publisher'],
-                                publisherLogo: newsItem['publisherLogo'],
-                                date: newsItem['date'],
-                              );
+                              return Container();
+                              // return PublisherCard(
+                              //   isOnPage: true
+                              //       .obs, //this let the follow button to showup based on the page user in [or other parameter as needed]
+                              //   category: newsItem['Category'],
+                              //   imageSource: newsItem['imageSource'],
+                              //   heading: newsItem['heading'],
+                              //   publisher: newsItem['publisher'],
+                              //   publisherLogo: newsItem['publisherLogo'],
+                              //   date: newsItem['date'],
+
+                              // );
                             }),
                           ),
                         );

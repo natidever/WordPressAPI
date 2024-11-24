@@ -207,16 +207,17 @@ class _DiscoverState extends State<Discover> with TickerProviderStateMixin {
                             Get.toNamed('/single_publisher');
                           },
                           child: Obx(() {
-                            return PublisherCard(
-                              isOnPage: false
-                                  .obs, //this let the follow button to showup based on the page user in [or other parameter as needed]
-                              category: newsItem['Category'],
-                              imageSource: newsItem['imageSource'],
-                              heading: newsItem['heading'],
-                              publisher: newsItem['publisher'],
-                              publisherLogo: newsItem['publisherLogo'],
-                              date: newsItem['date'],
-                            );
+                            return Container();
+                            // return PublisherCard(
+                            //   isOnPage: false
+                            //       .obs, //this let the follow button to showup based on the page user in [or other parameter as needed]
+                            //   category: newsItem['Category'],
+                            //   imageSource: newsItem['imageSource'],
+                            //   heading: newsItem['heading'],
+                            //   publisher: newsItem['publisher'],
+                            //   publisherLogo: newsItem['publisherLogo'],
+                            //   date: newsItem['date'],
+                            // );
                           }),
                         ),
                       );

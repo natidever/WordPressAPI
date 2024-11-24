@@ -211,7 +211,10 @@ class Login extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.w800),
                   )
                 ],
-              )
+              ),
+
+              //Custom form
+              CustomForm(isPassword: false, hintText: 'hintText')
             ],
           ),
         ),

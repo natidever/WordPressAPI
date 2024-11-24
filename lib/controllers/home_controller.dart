@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import '../models/blog_model.dart';
 
 class HomeController extends GetxController {
   // This list fakes API RESPONSE DATA FROM OUR BACKEND
@@ -11,6 +14,7 @@ class HomeController extends GetxController {
     delay();
     filteredList.value = publisherList;
     // Call fetchData method when controller initializes
+    fetchBlogPosts();
   }
 
   RxBool isLoading = true.obs;
@@ -24,7 +28,7 @@ class HomeController extends GetxController {
 
   final List<Map<String, dynamic>> trendingNewsData = [
     {
-      "Category": "Enviroment",
+      "Category": "Open",
       "imageSource": "assets/images/appcontents/heading1.jpg",
       "heading": "Global Summit on Climate Change: Historic Agreement Reached",
       "publisher": "BBC News ",
@@ -32,7 +36,7 @@ class HomeController extends GetxController {
       "date": "jun 9,2024",
     },
     {
-      "Category": "Fashion",
+      "Category": "Open",
       "imageSource": "assets/images/appcontents/heading1.jpg",
       "heading": "Kim kardashian start her new brand,in Las vegas delihem",
       "publisher": "BBC News",
@@ -40,7 +44,7 @@ class HomeController extends GetxController {
       "date": "jun 9,2024",
     },
     {
-      "Category": "sport",
+      "Category": "Open",
       "imageSource": "assets/images/appcontents/heading1.jpg",
       "heading": "Who do you think the most famous guy in NBA",
       "publisher": "BBC NEWS",
@@ -88,6 +92,47 @@ class HomeController extends GetxController {
             newsItem['heading'].toLowerCase().contains(lowerQuery) ||
             newsItem['publisher'].toLowerCase().contains(lowerQuery);
       }).toList();
+    }
+  }
+
+  // Observable variables
+  var blogPosts = <BlogPost>[].obs;
+  var error = ''.obs;
+
+  // API endpoint
+  final String apiUrl = 'https://blog.bolenav.com/wp-json/wp/v2/posts';
+
+  Future<void> fetchBlogPosts() async {
+    try {
+      isLoading(true);
+      error(''); // Reset error message
+
+      final response = await http.get(Uri.parse(apiUrl));
+
+      if (response.statusCode == 200) {
+        final List<dynamic> jsonData = json.decode(response.body);
+        blogPosts.value = BlogPost.fromJsonList(jsonData);
+      } else {
+        error('Failed to load blog posts. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      error('Error fetching blog posts: $e');
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  // Method to refresh blog posts
+  Future<void> refreshBlogPosts() async {
+    await fetchBlogPosts();
+  }
+
+  // Method to get a single blog post by ID
+  BlogPost? getBlogPostById(int id) {
+    try {
+      return blogPosts.firstWhere((post) => post.id == id);
+    } catch (e) {
+      return null;
     }
   }
 }

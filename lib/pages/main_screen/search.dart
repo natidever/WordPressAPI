@@ -525,7 +525,7 @@ class _SearchState extends State<Search> with TickerProviderStateMixin {
                             dropdownValue = newValue;
                           });
                         },
-                        items: ['Enviroment', 'Technology', 'Politics', 'Sport']
+                        items: ['Open', 'Open', 'Open', 'Open']
                             .map((value) => DropdownMenuItem(
                                   value: value,
                                   child: Text(value),
