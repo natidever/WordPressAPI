@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app/controllers/home_controller.dart';
+import 'package:news_app/pages/main_screen/post_detail.dart';
 import 'package:news_app/utils/constants.dart';
 import 'package:news_app/widgets/ad_widget.dart';
 import 'package:news_app/widgets/cards.dart';
@@ -133,7 +134,7 @@ class Homepage extends StatelessWidget {
                           padding: const EdgeInsets.fromLTRB(16.0, 0, 16, 20),
                           child: GestureDetector(
                             onTap: () {
-                              Get.toNamed('/single_publisher');
+                              Get.to(() => PostDetail(post: post));
                             },
                             child: PublisherCard(
                               space: size.width * 0.1,
