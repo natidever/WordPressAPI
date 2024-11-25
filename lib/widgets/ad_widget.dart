@@ -1,33 +1,74 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:news_app/services/ad_services.dart';
 
-class AdBannerWidget extends StatelessWidget {
-  const AdBannerWidget({Key? key}) : super(key: key);
+class AdBannerWidget extends StatefulWidget {
+  final AdSize adSize;
+  final String? adUnitId;
+
+  const AdBannerWidget({
+    Key? key,
+    this.adSize = AdSize.banner,
+    this.adUnitId,
+  }) : super(key: key);
+
+  @override
+  State<AdBannerWidget> createState() => _AdBannerWidgetState();
+}
+
+class _AdBannerWidgetState extends State<AdBannerWidget> {
+  late BannerAd _bannerAd;
+  bool _isAdLoaded = false;
+  final AdServices _adServices = AdServices();
+
+  @override
+  void initState() {
+    super.initState();
+    _initBannerAd();
+  }
+
+  void _initBannerAd() {
+    _bannerAd = BannerAd(
+      size: widget.adSize,
+      adUnitId: widget.adUnitId ?? AdServices.testBannerId,
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          if (mounted) {
+            setState(() {
+              _isAdLoaded = true;
+            });
+          }
+        },
+        onAdFailedToLoad: (ad, error) {
+          debugPrint('BannerAd failed to load: $error');
+          ad.dispose();
+        },
+      ),
+      request: const AdRequest(),
+    );
+
+    _bannerAd.load();
+  }
+
+  @override
+  void dispose() {
+    _bannerAd.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final adServices = Get.find<AdServices>();
-
-    return Obx(() {
-      if (!adServices.isAdAvailable.value || adServices.bannerAd == null) {
-        return const SizedBox.shrink(); // Hide if no ad is available
-      }
-
-      return Container(
-        width: double.infinity,
-        height: 60, // Standard banner height
-        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          color: Colors.grey[200],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(12),
-          child: AdWidget(ad: adServices.bannerAd!),
-        ),
+    if (!_isAdLoaded) {
+      return SizedBox(
+        height: widget.adSize.height.toDouble(),
+        width: widget.adSize.width.toDouble(),
       );
-    });
+    }
+
+    return SizedBox(
+      width: _bannerAd.size.width.toDouble(),
+      height: _bannerAd.size.height.toDouble(),
+      child: AdWidget(ad: _bannerAd),
+    );
   }
 }
