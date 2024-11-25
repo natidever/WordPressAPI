@@ -85,13 +85,20 @@ class Homepage extends StatelessWidget {
                                   homecontroller.trendingNewsData[index];
                               return Padding(
                                 padding: const EdgeInsets.only(right: 8.0),
-                                child: TrendingNewsCard(
-                                  category: newsItem['Category'],
-                                  imageSource: newsItem['imageSource'],
-                                  heading: newsItem['heading'],
-                                  publisher: newsItem['publisher'],
-                                  publisherLogo: newsItem['publisherLogo'],
-                                  date: newsItem['date'],
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    await globalAdServices.showInterstitialAd();
+                                    Get.to(() =>
+                                        PostDetail(post: newsItem['blogPost']));
+                                  },
+                                  child: TrendingNewsCard(
+                                    category: newsItem['Category'],
+                                    imageSource: newsItem['imageSource'],
+                                    heading: newsItem['heading'],
+                                    publisher: newsItem['publisher'],
+                                    publisherLogo: newsItem['publisherLogo'],
+                                    date: newsItem['date'],
+                                  ),
                                 ),
                               );
                             },

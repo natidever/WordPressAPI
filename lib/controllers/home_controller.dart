@@ -44,6 +44,7 @@ class HomeController extends GetxController {
         final trendingPosts = jsonData.take(3).map((post) {
           final blogPost = BlogPost.fromJson(post);
           return {
+            "blogPost": blogPost,
             "Category": "Open",
             "imageSource": blogPost.jetpackFeaturedMediaUrl,
             "heading": removeHtmlTags(blogPost.title.rendered),
