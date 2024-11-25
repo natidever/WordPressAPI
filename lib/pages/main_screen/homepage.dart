@@ -7,6 +7,7 @@ import 'package:news_app/widgets/custom_buttons.dart';
 import 'package:news_app/widgets/custom_texts.dart';
 import 'package:news_app/widgets/effects.dart';
 import 'package:shimmer/shimmer.dart';
+// import 'package:news_app/widgets/ad_widget.dart';
 
 class Homepage extends StatelessWidget {
   final homecontroller = Get.find<HomeController>();
@@ -105,7 +106,18 @@ class Homepage extends StatelessWidget {
                 : SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                        final post = homecontroller.blogPosts[index];
+                        // Show ad after every 3 items
+                        // if (index > 0 && index % 4 == 3) {
+                        //   return BannerAdWidget();
+                        // }
+
+                        // Calculate actual post index (accounting for ad slots)
+                        final postIndex = index - (index ~/ 4);
+                        if (postIndex >= homecontroller.blogPosts.length) {
+                          return null;
+                        }
+
+                        final post = homecontroller.blogPosts[postIndex];
                         return Padding(
                           padding: const EdgeInsets.fromLTRB(16.0, 0, 16, 20),
                           child: GestureDetector(
@@ -120,7 +132,9 @@ class Homepage extends StatelessWidget {
                           ),
                         );
                       },
-                      childCount: homecontroller.blogPosts.length,
+                      // Adjust child count to account for ads
+                      childCount: homecontroller.blogPosts.length +
+                          (homecontroller.blogPosts.length ~/ 3),
                     ),
                   );
           }),

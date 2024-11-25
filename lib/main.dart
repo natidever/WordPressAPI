@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
         title: 'News App',
         debugShowCheckedModeBanner: false,
         navigatorKey: navigatorKey,
-        initialRoute: AppRoutes.onboarding,
+        initialRoute: AppRoutes.home,
         getPages: AppRoutes.routes);
   }
 }

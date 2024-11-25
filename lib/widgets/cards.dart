@@ -19,14 +19,10 @@ Widget TrendingNewsCard(
     children: [
       Container(
         width: 301,
-        // height: 315,
         height: 305,
         decoration: BoxDecoration(
-          // color: Color.fromRGBO(249, 252, 254, 1),
           color: customBackgroundColor,
-          // color: Colors.black,
           borderRadius: BorderRadius.circular(10),
-          // color: Colors.blacktop
         ),
         child: Column(
           children: [
@@ -35,10 +31,33 @@ Widget TrendingNewsCard(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(13),
                 child: Container(
-                    width: 285,
-                    height: 161,
-                    // height: 264,
-                    child: Image.asset(fit: BoxFit.cover, imageSource ?? "")),
+                  width: 285,
+                  height: 161,
+                  child: imageSource != null && imageSource.startsWith('http')
+                      ? Image.network(
+                          imageSource,
+                          fit: BoxFit.cover,
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) {
+                              return child;
+                            }
+                            return Image.asset(
+                              'assets/images/place_holder.jpg',
+                              fit: BoxFit.cover,
+                            );
+                          },
+                          errorBuilder: (context, error, stackTrace) {
+                            return Image.asset(
+                              'assets/images/place_holder.jpg',
+                              fit: BoxFit.cover,
+                            );
+                          },
+                        )
+                      : Image.asset(
+                          'assets/images/place_holder.jpg',
+                          fit: BoxFit.cover,
+                        ),
+                ),
               ),
             ),
             Padding(
@@ -54,7 +73,6 @@ Widget TrendingNewsCard(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(10),
@@ -77,7 +95,7 @@ Widget TrendingNewsCard(
                           'assets/images/icons/verified.png')
                     ],
                   ),
-                  SubText(text: "Jun 9, 2023"),
+                  SubText(text: date ?? "Date unavailable"),
                 ],
               ),
             )
@@ -91,15 +109,16 @@ Widget TrendingNewsCard(
           // bottom: 32,
           child: Container(
             decoration: BoxDecoration(
-                color: Color.fromRGBO(42, 186, 255, 1),
+                // color: Color.fromRGBO(187, 204, 75, 1),
+                color: Color.fromRGBO(255, 215, 0, 1.0), // Pure Gold
                 borderRadius: BorderRadius.circular(5)),
             // width: 84,
             // height: 27,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
               child: Text(
-                category ?? "Environment",
-                style: TextStyle(color: white),
+                category ?? "sss",
+                style: TextStyle(color: Colors.black),
               ),
             ),
           )),
