@@ -133,7 +133,9 @@ class Homepage extends StatelessWidget {
                         return Padding(
                           padding: const EdgeInsets.fromLTRB(16.0, 0, 16, 20),
                           child: GestureDetector(
-                            onTap: () {
+                            onTap: () async {
+                              // Show interstitial ad before navigation
+                              await globalAdServices.showInterstitialAd();
                               Get.to(() => PostDetail(post: post));
                             },
                             child: PublisherCard(

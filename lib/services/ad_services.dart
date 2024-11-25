@@ -91,6 +91,48 @@ class AdServices extends GetxController {
       ),
     );
   }
+
+  InterstitialAd? _interstitialAd;
+
+  // Test ad unit ID for interstitial
+  final String _testInterstitialAdUnitId = Platform.isAndroid
+      ? 'ca-app-pub-3940256099942544/1033173712' // Android test ID
+      : 'ca-app-pub-3940256099942544/4411468910'; // iOS test ID
+
+  @override
+  void onInit() {
+    super.onInit();
+    _loadInterstitialAd();
+  }
+
+  void _loadInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: _testInterstitialAdUnitId,
+      request: AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (ad) {
+          _interstitialAd = ad;
+          print('Interstitial ad loaded successfully');
+        },
+        onAdFailedToLoad: (error) {
+          print('Interstitial ad failed to load: $error');
+        },
+      ),
+    );
+  }
+
+  Future<void> showInterstitialAd() async {
+    if (_interstitialAd != null) {
+      await _interstitialAd!.show();
+      _interstitialAd = null;
+      // Load the next interstitial ad
+      _loadInterstitialAd();
+    } else {
+      print('Interstitial ad not ready yet');
+      // Try to load a new ad
+      _loadInterstitialAd();
+    }
+  }
 }
 
 class AdService {
