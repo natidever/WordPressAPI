@@ -76,7 +76,7 @@ class Homepage extends StatelessWidget {
                 Obx(() {
                   return homecontroller.isLoading.value == false
                       ? SizedBox(
-                          height: 305,
+                          height: 340,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: homecontroller.trendingNewsData.length,
@@ -98,7 +98,7 @@ class Homepage extends StatelessWidget {
                           ),
                         )
                       : SizedBox(
-                          height: 305,
+                          height: 340,
                           width: MediaQuery.of(context).size.width,
                           child: TrendingShimmerEffect(),
                         );

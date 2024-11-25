@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
       initialBinding: MainBinder(),
       title: 'News App',
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.home,
+      initialRoute: AppRoutes.onboarding,
       getPages: AppRoutes.routes,
     );
   }

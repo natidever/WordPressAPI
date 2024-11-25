@@ -25,8 +25,8 @@ class _BaseScreenState extends State<BaseScreen> {
   static List<Widget> _widgetOptions = <Widget>[
     Homepage(),
     Discover(),
-    Bookmark(),
-    Profile()
+    // Bookmark(),
+    // Profile()
   ];
 
   @override
@@ -89,50 +89,12 @@ class _BaseScreenState extends State<BaseScreen> {
                   //     Colors.blue, // Color when the button is active
                   iconColor: Colors.grey,
                   leading: Image.asset(
-                    'assets/images/icons/discover.png',
-                    width: 30, // Adjust the size as needed
-                    height: 34,
-                  ),
-                  // icon: FontAwesomeIcons.houseSignal,
-                  text: 'Discover',
-                  textStyle: TextStyle(
-                    fontSize: 16, // Set the font size
-                    fontWeight: FontWeight.bold, // Set the font weight
-                    // Set the text color
-                  ),
-                ),
-                GButton(
-                  icon: Icons.nat,
-
-                  // iconActiveColor:
-                  //     Colors.blue, // Color when the button is active
-                  iconColor: Colors.grey,
-                  leading: Image.asset(
                     'assets/images/icons/bookmarkpng.png',
                     width: 30, // Adjust the size as needed
                     height: 34,
                   ),
                   // icon: FontAwesomeIcons.houseSignal,
                   text: 'Bookmark',
-                  textStyle: TextStyle(
-                    fontSize: 16, // Set the font size
-                    fontWeight: FontWeight.bold, // Set the font weight
-                    // Set the text color
-                  ),
-                ),
-                GButton(
-                  icon: Icons.nat,
-
-                  // iconActiveColor:
-                  //     Colors.blue, // Color when the button is active
-                  iconColor: Colors.grey,
-                  leading: Image.asset(
-                    'assets/images/icons/profile.png',
-                    width: 30, // Adjust the size as needed
-                    height: 34,
-                  ),
-                  // icon: FontAwesomeIcons.houseSignal,
-                  text: 'Profile',
                   textStyle: TextStyle(
                     fontSize: 16, // Set the font size
                     fontWeight: FontWeight.bold, // Set the font weight

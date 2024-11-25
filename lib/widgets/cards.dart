@@ -7,6 +7,7 @@ import 'package:news_app/utils/constants.dart';
 import 'package:news_app/widgets/custom_buttons.dart';
 import 'package:news_app/widgets/custom_texts.dart';
 import 'package:news_app/widgets/layout_helper.dart';
+import 'package:news_app/controllers/discover_controller.dart';
 
 Widget TrendingNewsCard(
     {String? category,
@@ -19,7 +20,7 @@ Widget TrendingNewsCard(
     children: [
       Container(
         width: 301,
-        height: 305,
+        height: 340,
         decoration: BoxDecoration(
           color: customBackgroundColor,
           borderRadius: BorderRadius.circular(10),
@@ -99,22 +100,43 @@ Widget TrendingNewsCard(
                 ],
               ),
             ),
-            // TextButton(onPressed: () {}, child: Text("Bookmark"))
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 8.0, bottom: 8.0),
+                  child: TextButton.icon(
+                    onPressed: () {
+                      Get.snackbar(
+                        'Bookmark',
+                        'Article bookmarked successfully',
+                        snackPosition: SnackPosition.BOTTOM,
+                      );
+                    },
+                    icon: Icon(Icons.bookmark_border, size: 16),
+                    label: Text(
+                      'Bookmark',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      minimumSize: Size(0, 30),
+                      foregroundColor: Colors.grey[600],
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
       Positioned(
-          // top: 33,
           top: 15,
           left: 15,
-          // bottom: 32,
           child: Container(
             decoration: BoxDecoration(
-                // color: Color.fromRGBO(187, 204, 75, 1),
-                color: Color.fromRGBO(255, 215, 0, 1.0), // Pure Gold
+                color: Color.fromRGBO(255, 215, 0, 1.0),
                 borderRadius: BorderRadius.circular(5)),
-            // width: 84,
-            // height: 27,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
               child: Text(
@@ -184,95 +206,124 @@ Widget PublisherCard({
     return words.take(15).join(' ') + (words.length > 15 ? '...' : '');
   }
 
-  return Container(
-    width: 392,
-    height: 140, // Reduced height for more compact design
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(8),
-      color: customBackgroundColor,
-    ),
-    child: Padding(
-      padding: const EdgeInsets.all(12),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Featured Image
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Container(
-              width: 120,
-              height: 120,
-              child: post.jetpackFeaturedMediaUrl.isNotEmpty
-                  ? Image.network(
-                      post.jetpackFeaturedMediaUrl,
-                      fit: BoxFit.cover,
-                      loadingBuilder: (context, child, loadingProgress) {
-                        if (loadingProgress == null) {
-                          return child;
-                        }
-                        return Image.asset(
+  return Stack(
+    children: [
+      Container(
+        width: 392,
+        height: 140,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: customBackgroundColor,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Featured Image
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Container(
+                  width: 120,
+                  height: 120,
+                  child: post.jetpackFeaturedMediaUrl.isNotEmpty
+                      ? Image.network(
+                          post.jetpackFeaturedMediaUrl,
+                          fit: BoxFit.cover,
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) {
+                              return child;
+                            }
+                            return Image.asset(
+                              'assets/images/place_holder.jpg',
+                              fit: BoxFit.cover,
+                            );
+                          },
+                          errorBuilder: (context, error, stackTrace) {
+                            return Image.asset(
+                              'assets/images/place_holder.jpg',
+                              fit: BoxFit.cover,
+                            );
+                          },
+                        )
+                      : Image.asset(
                           'assets/images/place_holder.jpg',
                           fit: BoxFit.cover,
-                        );
-                      },
-                      errorBuilder: (context, error, stackTrace) {
-                        return Image.asset(
-                          'assets/images/place_holder.jpg',
-                          fit: BoxFit.cover,
-                        );
-                      },
-                    )
-                  : Image.asset(
-                      'assets/images/place_holder.jpg',
-                      fit: BoxFit.cover,
+                        ),
+                ),
+              ),
+              SizedBox(width: 12),
+              // Content Section
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Title
+                    Text(
+                      removeHtmlTags(post.title.rendered),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        height: 1.2,
+                      ),
                     ),
-            ),
+                    SizedBox(height: 8),
+                    // Excerpt
+                    Text(
+                      getExcerpt(),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey[600],
+                        height: 1.3,
+                      ),
+                    ),
+                    Spacer(),
+                    // Date
+                    Text(
+                      formatDate(post.date),
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey[700],
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          SizedBox(width: 12),
-          // Content Section
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Title
-                Text(
-                  removeHtmlTags(post.title.rendered),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    height: 1.2,
-                  ),
-                ),
-                SizedBox(height: 8),
-                // Excerpt
-                Text(
-                  getExcerpt(),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey[600],
-                    height: 1.3,
-                  ),
-                ),
-                Spacer(),
-                // Date
-                Text(
-                  formatDate(post.date),
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey[700],
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+        ),
       ),
-    ),
+      // Bookmark button positioned in top right corner
+      Positioned(
+        top: 0,
+        right: 0,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: GetBuilder<DiscoverController>(
+            builder: (controller) {
+              final isBookmarked = controller.isBookmarked(post);
+              return IconButton(
+                icon: Icon(
+                  isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                  size: 20,
+                ),
+                color: isBookmarked ? Colors.yellow[700] : Colors.grey[600],
+                padding: EdgeInsets.all(4),
+                constraints: BoxConstraints(),
+                onPressed: () => controller.toggleBookmark(post),
+              );
+            },
+          ),
+        ),
+      ),
+    ],
   );
 }
 

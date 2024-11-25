@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:news_app/controllers/discover_controller.dart';
 import 'package:news_app/models/blog_model.dart';
 import 'package:news_app/utils/constants.dart';
 import 'package:news_app/widgets/custom_buttons.dart';
@@ -59,10 +60,16 @@ class PostDetail extends StatelessWidget {
           onPressed: () => Get.back(),
         ),
         actions: [
-          IconButton(
-            icon: Icon(Icons.bookmark_border, color: Colors.black),
-            onPressed: () {
-              // TODO: Implement bookmark functionality
+          GetBuilder<DiscoverController>(
+            builder: (controller) {
+              final isBookmarked = controller.isBookmarked(post);
+              return IconButton(
+                icon: Icon(
+                  isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                  color: Colors.black,
+                ),
+                onPressed: () => controller.toggleBookmark(post),
+              );
             },
           ),
           IconButton(

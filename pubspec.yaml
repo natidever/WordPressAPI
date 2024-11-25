@@ -40,6 +40,7 @@ dependencies:
   google_nav_bar: ^5.0.6
   http: ^1.1.0
   logger: ^2.5.0
+  shared_preferences: ^2.3.3
   shimmer: ^3.0.0
   smooth_page_indicator: ^1.2.0+3
   stack_appodeal_flutter: 3.3.3+1
