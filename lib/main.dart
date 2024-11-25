@@ -1,53 +1,45 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:news_app/bindings/main_binder.dart';
-import 'package:news_app/pages/global_error_screen.dart';
 import 'package:news_app/route/app_route.dart';
+import 'package:news_app/services/ad_services.dart';
 
-void main() {
-  /// handling async errors
-  runZonedGuarded(() {
-    runApp(MyApp());
-  }, (Object error, StackTrace stack) {
-    // This help use to handle asynchronous error globally
-    print('Asynchronous Error: $error');
-    //  we can report error to an external service like Sentry
-  });
+Future<void> main() async {
+  // Ensure Flutter is initialized
+  WidgetsFlutterBinding.ensureInitialized();
 
-  /// Here ,i used  custom page to handle global errors
-  /// Based on which type of error has occured in the application
-  /// if the app encounter non-flutter error custom page is used
-  /// to handel the error gracefully
+  // Initialize MobileAds with proper error handling
+  try {
+    await MobileAds.instance.initialize().then((InitializationStatus status) {
+      debugPrint('AdMob SDK initialized');
+      status.adapterStatuses.forEach((key, value) {
+        debugPrint('Adapter status for $key: ${value.state}');
+      });
+    });
 
-  FlutterError.onError = (FlutterErrorDetails details) {
-    // Handle synchronous errors globally
-    print('Flutter Error: ${details.exceptionAsString()}');
+    // Initialize AdServices after MobileAds
+    final adServices = Get.put(AdServices());
+    await adServices.initializeAd();
+  } catch (e, stackTrace) {
+    debugPrint('Error initializing ads: $e');
+    debugPrint('Stack trace: $stackTrace');
+  }
 
-    // Redirect to custom error page using GetX
-    if (details.exception is! FlutterError) {
-      print('uuuuuuuuu${details.exception}');
-      // Use GetX to navigate to the error page
-      print('${details.exceptionAsString()}');
-      Get.to(() => GlobalErrorScreen(
-            errorMessage: details.exceptionAsString(),
-          ));
-    }
-  };
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        initialBinding: MainBinder(),
-        title: 'News App',
-        debugShowCheckedModeBanner: false,
-        navigatorKey: navigatorKey,
-        initialRoute: AppRoutes.home,
-        getPages: AppRoutes.routes);
+      initialBinding: MainBinder(),
+      title: 'News App',
+      debugShowCheckedModeBanner: false,
+      initialRoute: AppRoutes.onboarding,
+      getPages: AppRoutes.routes,
+    );
   }
 }

@@ -4,6 +4,7 @@ import 'package:news_app/controllers/discover_controller.dart';
 import 'package:news_app/controllers/home_controller.dart';
 import 'package:news_app/controllers/login_controller.dart';
 import 'package:news_app/controllers/search_controller.dart';
+import 'package:news_app/services/ad_services.dart';
 
 class MainBinder extends Bindings {
   @override
@@ -12,5 +13,6 @@ class MainBinder extends Bindings {
     Get.put(HomeController());
     Get.put(DiscoverController());
     Get.put(CusomSearchController());
+    Get.put(AdServices());
   }
 }

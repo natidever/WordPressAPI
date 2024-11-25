@@ -2,15 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app/controllers/home_controller.dart';
 import 'package:news_app/utils/constants.dart';
+import 'package:news_app/widgets/ad_widget.dart';
 import 'package:news_app/widgets/cards.dart';
 import 'package:news_app/widgets/custom_buttons.dart';
 import 'package:news_app/widgets/custom_texts.dart';
 import 'package:news_app/widgets/effects.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:news_app/services/ad_services.dart';
+// import 'package:appodeal/appodeal.dart';
 // import 'package:news_app/widgets/ad_widget.dart';
 
 class Homepage extends StatelessWidget {
   final homecontroller = Get.find<HomeController>();
+  final globalAdServices = Get.find<AdServices>();
+
+  Widget _buildBannerAdWidget() {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      child: const AdBannerWidget(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +55,7 @@ class Homepage extends StatelessWidget {
             padding: const EdgeInsets.all(18.0),
             sliver: SliverList(
               delegate: SliverChildListDelegate([
-                SecondaryText600(fontSize: 28, text: "Welcomeback, Tyler"),
+                SecondaryText600(fontSize: 28, text: "Welcomeback, Mosam"),
                 SubText(
                     text: 'Discover a world of news that matters to you',
                     isheading: true),
@@ -107,9 +118,9 @@ class Homepage extends StatelessWidget {
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
                         // Show ad after every 3 items
-                        // if (index > 0 && index % 4 == 3) {
-                        //   return BannerAdWidget();
-                        // }
+                        if (index > 0 && index % 4 == 3) {
+                          return _buildBannerAdWidget();
+                        }
 
                         // Calculate actual post index (accounting for ad slots)
                         final postIndex = index - (index ~/ 4);

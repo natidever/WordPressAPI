@@ -98,7 +98,8 @@ Widget TrendingNewsCard(
                   SubText(text: date ?? "Date unavailable"),
                 ],
               ),
-            )
+            ),
+            // TextButton(onPressed: () {}, child: Text("Bookmark"))
           ],
         ),
       ),
